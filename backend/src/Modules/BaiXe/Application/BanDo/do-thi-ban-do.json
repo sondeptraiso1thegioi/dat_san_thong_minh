@@ -1,0 +1,43 @@
+{
+  "_ghiChu": [
+    "Đồ thị điểm mốc trên đường nội bộ của ảnh 'Phương án bố trí bãi đỗ xe' (frontend/src/assets/so-do-bai.png, 683 x 342 px).",
+    "x, y: tỉ lệ theo chiều rộng / chiều cao ảnh (0..1), để ảnh co giãn vẫn đúng. Sửa toạ độ ở đây rồi build lại API.",
+    "Nút đầu tiên là cổng vào (Dijkstra tính từ đây). Nút có 'khu' là điểm đến của khu có cùng ma_so_do (bảng khu_vuc).",
+    "Cạnh vô hướng; độ dài TỰ TÍNH từ toạ độ (px) nhân metMoiPx (ảnh không theo tỉ lệ, đây là số ước lượng)."
+  ],
+  "anh": { "rong": 683, "cao": 342, "metMoiPx": 0.6 },
+  "nut": [
+    { "ma": "CONG_X",    "ten": "Cổng vào X",                         "x": 0.035, "y": 0.41 },
+    { "ma": "NGA_BA_X1", "ten": "Ngã ba Nhà xe cán bộ X1",            "x": 0.195, "y": 0.41 },
+    { "ma": "GOC_TRUC",  "ten": "Trục đường chính",                   "x": 0.205, "y": 0.47 },
+    { "ma": "GOC_TREN",  "ten": null,                                 "x": 0.205, "y": 0.29 },
+    { "ma": "DUONG_R",   "ten": null,                                 "x": 0.24,  "y": 0.265 },
+    { "ma": "DAU_R",     "ten": "Đầu khu R",                          "x": 0.30,  "y": 0.27 },
+    { "ma": "KHU_R",     "ten": "Khu R",                              "x": 0.476, "y": 0.272, "khu": "R" },
+    { "ma": "TRUC_GIUA", "ten": "Qua Nhà H1",                         "x": 0.40,  "y": 0.47 },
+    { "ma": "RE_HAM",    "ten": "Rẽ giữa Hội trường G3 và lối hầm",   "x": 0.668, "y": 0.47 },
+    { "ma": "LOI_HAM",   "ten": "Lối xuống hầm",                      "x": 0.669, "y": 0.53 },
+    { "ma": "KHU_HAM",   "ten": "Hầm B1/B2",                          "x": 0.669, "y": 0.62,  "khu": "HAM" },
+    { "ma": "TRUC_DONG", "ten": null,                                 "x": 0.697, "y": 0.47 },
+    { "ma": "DOC_S",     "ten": "Đường giữa H1 và H3",                "x": 0.697, "y": 0.31 },
+    { "ma": "DAU_S",     "ten": "Đầu khu S",                          "x": 0.735, "y": 0.275 },
+    { "ma": "KHU_S",     "ten": "Khu S",                              "x": 0.85,  "y": 0.278, "khu": "S" }
+  ],
+  "canh": [
+    ["CONG_X", "NGA_BA_X1"],
+    ["NGA_BA_X1", "GOC_TRUC"],
+    ["NGA_BA_X1", "GOC_TREN"],
+    ["GOC_TRUC", "GOC_TREN"],
+    ["GOC_TREN", "DUONG_R"],
+    ["DUONG_R", "DAU_R"],
+    ["DAU_R", "KHU_R"],
+    ["GOC_TRUC", "TRUC_GIUA"],
+    ["TRUC_GIUA", "RE_HAM"],
+    ["RE_HAM", "LOI_HAM"],
+    ["LOI_HAM", "KHU_HAM"],
+    ["RE_HAM", "TRUC_DONG"],
+    ["TRUC_DONG", "DOC_S"],
+    ["DOC_S", "DAU_S"],
+    ["DAU_S", "KHU_S"]
+  ]
+}

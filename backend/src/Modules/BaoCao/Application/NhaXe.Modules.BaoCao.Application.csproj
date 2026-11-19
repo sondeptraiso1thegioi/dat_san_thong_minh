@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\SharedKernel\NhaXe.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\TimXe\Contracts\NhaXe.Modules.TimXe.Contracts.csproj" />
+    <ProjectReference Include="..\..\CongRaVao\Contracts\NhaXe.Modules.CongRaVao.Contracts.csproj" />
+    <ProjectReference Include="..\..\GoiCho\Contracts\NhaXe.Modules.GoiCho.Contracts.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.15" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>

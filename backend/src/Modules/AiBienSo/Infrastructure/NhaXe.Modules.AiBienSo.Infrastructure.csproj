@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Application/NhaXe.Modules.AiBienSo.Application.csproj" /></ItemGroup>
+  <ItemGroup>
+    <!-- Chạy file .onnx (Model A YOLOv8n, PaddleOCR rec) trên CPU, trong tiến trình .NET -->
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.31.1" />
+    <!-- Chỉ dùng để giải mã JPEG/PNG (libjpeg-turbo giống OpenCV lúc train, giải mã ra đúng từng điểm ảnh);
+         cắt và co ảnh tự viết trong AnhRgb. NativeAssets.Linux cho container Docker. -->
+    <PackageReference Include="SkiaSharp" Version="3.119.4" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.119.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.15" />
+  </ItemGroup>
+</Project>

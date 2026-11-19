@@ -1,0 +1,121 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Api/">
+    <Project Path="src/Api/NhaXe.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/AiBienSo/" />
+  <Folder Name="/src/Modules/AiBienSo/Application/">
+    <Project Path="src/Modules/AiBienSo/Application/NhaXe.Modules.AiBienSo.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/AiBienSo/Contracts/">
+    <Project Path="src/Modules/AiBienSo/Contracts/NhaXe.Modules.AiBienSo.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/AiBienSo/Domain/">
+    <Project Path="src/Modules/AiBienSo/Domain/NhaXe.Modules.AiBienSo.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/AiBienSo/Infrastructure/">
+    <Project Path="src/Modules/AiBienSo/Infrastructure/NhaXe.Modules.AiBienSo.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/BaiXe/" />
+  <Folder Name="/src/Modules/BaiXe/Application/">
+    <Project Path="src/Modules/BaiXe/Application/NhaXe.Modules.BaiXe.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/BaiXe/Contracts/">
+    <Project Path="src/Modules/BaiXe/Contracts/NhaXe.Modules.BaiXe.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/BaiXe/Domain/">
+    <Project Path="src/Modules/BaiXe/Domain/NhaXe.Modules.BaiXe.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/BaiXe/Infrastructure/">
+    <Project Path="src/Modules/BaiXe/Infrastructure/NhaXe.Modules.BaiXe.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/BaoCao/" />
+  <Folder Name="/src/Modules/BaoCao/Application/">
+    <Project Path="src/Modules/BaoCao/Application/NhaXe.Modules.BaoCao.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/CongRaVao/" />
+  <Folder Name="/src/Modules/CongRaVao/Application/">
+    <Project Path="src/Modules/CongRaVao/Application/NhaXe.Modules.CongRaVao.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/CongRaVao/Contracts/">
+    <Project Path="src/Modules/CongRaVao/Contracts/NhaXe.Modules.CongRaVao.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/CongRaVao/Domain/">
+    <Project Path="src/Modules/CongRaVao/Domain/NhaXe.Modules.CongRaVao.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/CongRaVao/Infrastructure/">
+    <Project Path="src/Modules/CongRaVao/Infrastructure/NhaXe.Modules.CongRaVao.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/GoiCho/" />
+  <Folder Name="/src/Modules/GoiCho/Application/">
+    <Project Path="src/Modules/GoiCho/Application/NhaXe.Modules.GoiCho.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/GoiCho/Contracts/">
+    <Project Path="src/Modules/GoiCho/Contracts/NhaXe.Modules.GoiCho.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/GoiCho/Domain/">
+    <Project Path="src/Modules/GoiCho/Domain/NhaXe.Modules.GoiCho.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/GoiCho/Infrastructure/">
+    <Project Path="src/Modules/GoiCho/Infrastructure/NhaXe.Modules.GoiCho.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/NhomGiaDinh/" />
+  <Folder Name="/src/Modules/NhomGiaDinh/Application/">
+    <Project Path="src/Modules/NhomGiaDinh/Application/NhaXe.Modules.NhomGiaDinh.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/NhomGiaDinh/Contracts/">
+    <Project Path="src/Modules/NhomGiaDinh/Contracts/NhaXe.Modules.NhomGiaDinh.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/NhomGiaDinh/Domain/">
+    <Project Path="src/Modules/NhomGiaDinh/Domain/NhaXe.Modules.NhomGiaDinh.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/NhomGiaDinh/Infrastructure/">
+    <Project Path="src/Modules/NhomGiaDinh/Infrastructure/NhaXe.Modules.NhomGiaDinh.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/TaiKhoan/" />
+  <Folder Name="/src/Modules/TaiKhoan/Application/">
+    <Project Path="src/Modules/TaiKhoan/Application/NhaXe.Modules.TaiKhoan.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/TaiKhoan/Contracts/">
+    <Project Path="src/Modules/TaiKhoan/Contracts/NhaXe.Modules.TaiKhoan.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/TaiKhoan/Domain/">
+    <Project Path="src/Modules/TaiKhoan/Domain/NhaXe.Modules.TaiKhoan.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/TaiKhoan/Infrastructure/">
+    <Project Path="src/Modules/TaiKhoan/Infrastructure/NhaXe.Modules.TaiKhoan.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/ThongBao/" />
+  <Folder Name="/src/Modules/ThongBao/Application/">
+    <Project Path="src/Modules/ThongBao/Application/NhaXe.Modules.ThongBao.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/ThongBao/Contracts/">
+    <Project Path="src/Modules/ThongBao/Contracts/NhaXe.Modules.ThongBao.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/ThongBao/Domain/">
+    <Project Path="src/Modules/ThongBao/Domain/NhaXe.Modules.ThongBao.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/ThongBao/Infrastructure/">
+    <Project Path="src/Modules/ThongBao/Infrastructure/NhaXe.Modules.ThongBao.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/TimXe/" />
+  <Folder Name="/src/Modules/TimXe/Application/">
+    <Project Path="src/Modules/TimXe/Application/NhaXe.Modules.TimXe.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/TimXe/Contracts/">
+    <Project Path="src/Modules/TimXe/Contracts/NhaXe.Modules.TimXe.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/TimXe/Domain/">
+    <Project Path="src/Modules/TimXe/Domain/NhaXe.Modules.TimXe.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/TimXe/Infrastructure/">
+    <Project Path="src/Modules/TimXe/Infrastructure/NhaXe.Modules.TimXe.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/SharedKernel/">
+    <Project Path="src/SharedKernel/NhaXe.SharedKernel.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/NhaXe.Tests/NhaXe.Tests.csproj" />
+  </Folder>
+</Solution>

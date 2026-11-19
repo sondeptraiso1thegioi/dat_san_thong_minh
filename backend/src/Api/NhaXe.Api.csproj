@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.15" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Mô hình AI đã train (source/models): Model A YOLOv8n + PaddleOCR rec, chép cạnh NhaXe.Api.dll vào thư mục models -->
+    <None Include="..\..\..\models\*" LinkBase="models" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharedKernel\NhaXe.SharedKernel.csproj" />
+    <ProjectReference Include="..\Modules\TaiKhoan\Infrastructure\NhaXe.Modules.TaiKhoan.Infrastructure.csproj" />
+    <ProjectReference Include="../Modules/AiBienSo/Infrastructure/NhaXe.Modules.AiBienSo.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\GoiCho\Infrastructure\NhaXe.Modules.GoiCho.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\ThongBao\Infrastructure\NhaXe.Modules.ThongBao.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\BaiXe\Infrastructure\NhaXe.Modules.BaiXe.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\NhomGiaDinh\Infrastructure\NhaXe.Modules.NhomGiaDinh.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\CongRaVao\Infrastructure\NhaXe.Modules.CongRaVao.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\TimXe\Infrastructure\NhaXe.Modules.TimXe.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\BaoCao\Application\NhaXe.Modules.BaoCao.Application.csproj" />
+  </ItemGroup>
+
+</Project>

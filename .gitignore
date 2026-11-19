@@ -1,0 +1,12 @@
+.env
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+.vs/
+.vscode/
+*.user
+TestResults/
+*.tsbuildinfo
+# Chứng chỉ proxy riêng của máy build (xem docker/certs/README.md): không đưa lên git
+docker/certs/*.crt

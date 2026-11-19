@@ -1,0 +1,78 @@
+# Buổi 7: nhiều container chạy bằng một lệnh.
+#   Lần đầu: copy .env.example thành .env, đổi mật khẩu, rồi:  docker compose up -d --build
+#   Mở http://localhost:8080 (giao diện), http://localhost:8080/swagger (API)
+# API chạy 2 bản (deploy.replicas), NGINX chia tải luân phiên (Buổi 7, 8).
+name: nha-de-xe
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      TZ: Asia/Ho_Chi_Minh                      # SYSDATETIME() trả giờ Việt Nam (thiết kế CSDL lưu giờ VN)
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+    ports:
+      - "127.0.0.1:${SQL_PORT:-14330}:1433"     # SSMS: localhost,14330
+    volumes:
+      - sqldata:/var/opt/mssql                  # dữ liệu còn nguyên khi tắt / bật container
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 15s
+    restart: unless-stopped                     # VPS khởi động lại thì SQL Server tự chạy lại
+
+  db-init:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    entrypoint: ["/bin/bash", "/db-init.sh"]
+    environment:
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+      RESET_DB: ${RESET_DB:-0}
+    volumes:
+      - ./database:/scripts:ro
+      - ./docker/db-init.sh:/db-init.sh:ro
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    image: nha-de-xe-api:latest
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+    environment:
+      # Buổi 11: bí mật lấy từ .env, không nằm trong mã nguồn
+      ConnectionStrings__NhaXe: "Server=sqlserver,1433;Database=NhaXeThongMinh;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+      Jwt__Key: ${JWT_KEY}
+      # Admin đầu tiên (chỉ tạo khi CSDL chưa có ADMIN nào), xem .env.example
+      AdminDauTien__HoTen: "${ADMIN_HO_TEN:-Quản trị viên}"
+      AdminDauTien__Sdt: ${ADMIN_SDT:-}
+      AdminDauTien__Email: ${ADMIN_EMAIL:-}
+      AdminDauTien__MatKhau: ${ADMIN_MAT_KHAU:-}
+      Swagger: "true"
+      TZ: Asia/Ho_Chi_Minh                      # DateTime.Now cùng múi giờ với SQL Server
+    volumes:
+      - uploads:/app/uploads                    # ảnh giấy đăng ký: 2 bản API dùng chung một chỗ lưu
+    deploy:
+      replicas: 2
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  web:
+    image: nha-de-xe-web:latest
+    build:
+      context: .
+      dockerfile: docker/web.Dockerfile
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8080}:8080"      # chỉ mở trong máy; ra Internet đi qua NGINX của VPS (HTTPS)
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  sqldata:
+  uploads:

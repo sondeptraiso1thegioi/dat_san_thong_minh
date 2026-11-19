@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\NhaXe.Modules.BaiXe.Domain.csproj" />
+    <ProjectReference Include="..\Contracts\NhaXe.Modules.BaiXe.Contracts.csproj" />
+    <ProjectReference Include="..\..\GoiCho\Contracts\NhaXe.Modules.GoiCho.Contracts.csproj" />
+    <ProjectReference Include="..\..\TaiKhoan\Contracts\NhaXe.Modules.TaiKhoan.Contracts.csproj" />
+    <ProjectReference Include="..\..\CongRaVao\Contracts\NhaXe.Modules.CongRaVao.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.15" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Đồ thị điểm mốc của bãi: sửa toạ độ trong file JSON rồi build lại -->
+    <EmbeddedResource Include="BanDo\do-thi-ban-do.json" />
+  </ItemGroup>
+
+</Project>
