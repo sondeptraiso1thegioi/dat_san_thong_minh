@@ -28,4 +28,16 @@ public sealed record BookingDetailDto(
     string Id, string Status, string VenueId, string VenueName, string VenueAddress, double Lat, double Lng,
     string CourtName, string Sport, string Environment,
     DateTimeOffset StartAt, DateTimeOffset EndAt, int Hours, long Price,
-    DateTimeOffset? HoldExpiresAt, string? CancelReason, DateTimeOffset CreatedAt, DateTimeOffset ServerNow);
+    DateTimeOffset? HoldExpiresAt, string? CancelReason, DateTimeOffset CreatedAt, DateTimeOffset ServerNow,
+    string? PaymentStatus = null, bool CanCancel = false, string? CancellationInfo = null);
+
+public sealed record PlayerBookingListItemDto(
+    string Id, string Status, string VenueId, string VenueName, string VenueAddress,
+    string CourtName, string Sport, string Environment,
+    DateTimeOffset StartAt, DateTimeOffset EndAt, int Hours, long Price,
+    DateTimeOffset? HoldExpiresAt, string? CancelReason, DateTimeOffset CreatedAt,
+    string? PaymentStatus, bool CanCancel, string? CancellationInfo);
+
+public sealed record PlayerBookingsResponse(
+    IReadOnlyList<PlayerBookingListItemDto> Items, int Page, int PageSize,
+    int TotalCount, int TotalPages, string View, DateTimeOffset ServerNow);

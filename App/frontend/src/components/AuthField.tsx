@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from 'react';
-import { View, Text, TextInput, TextInputProps, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, type TextInputProps, type TextInputInstance } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../constants/theme';
 import { webInputReset } from '../constants/webStyles';
@@ -11,7 +11,7 @@ interface Props extends TextInputProps {
   password?: boolean;
 }
 
-const AuthField = forwardRef<TextInput, Props>(function AuthField(
+const AuthField = forwardRef<TextInputInstance, Props>(function AuthField(
   { label, icon, error, password, ...props }, ref,
 ) {
   const [focused, setFocused] = useState(false);

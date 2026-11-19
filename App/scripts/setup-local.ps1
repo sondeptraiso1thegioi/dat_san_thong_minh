@@ -38,6 +38,6 @@ $envPath = Join-Path $appRoot 'frontend/.env'
 if (-not (Test-Path -LiteralPath $envPath)) {
     Copy-Item -LiteralPath (Join-Path $appRoot 'frontend/.env.example') -Destination $envPath
 }
-Write-Output "Backend: http://localhost:5100/api — Database: $Database"
+Write-Output "Backend: http://localhost:5100/api - Database: $Database"
 Write-Output 'Frontend: http://localhost:8081'
 Write-Output 'Script khong tao bang, khong sua du lieu, khong thay doi dich vu SQL Server.'

@@ -33,12 +33,23 @@ public sealed class PlayerBookingsController(IPlayerBookingService service) : Co
     public async Task<ActionResult<ApiResponse<BookingDetailDto?>>> ActiveHold(CancellationToken cancellationToken) =>
         Ok(new ApiResponse<BookingDetailDto?>(await service.GetActiveHoldAsync(User.GetUserId(), cancellationToken)));
 
+    /// <summary>Danh sách lịch đặt. view = all | upcoming | history; pageSize tối đa 50.</summary>
+    [HttpGet("bookings")]
+    public async Task<ActionResult<ApiResponse<PlayerBookingsResponse>>> List(
+        [FromQuery] string view = "all", [FromQuery] int page = 1, [FromQuery] int pageSize = 20,
+        CancellationToken cancellationToken = default) =>
+        Ok(new ApiResponse<PlayerBookingsResponse>(
+            await service.GetBookingsAsync(User.GetUserId(), view, page, pageSize, cancellationToken)));
+
     [HttpGet("bookings/{bookingId:long}")]
     public async Task<ActionResult<ApiResponse<BookingDetailDto>>> Get(long bookingId, CancellationToken cancellationToken) =>
         Ok(new ApiResponse<BookingDetailDto>(await service.GetBookingAsync(User.GetUserId(), bookingId, cancellationToken)));
 
-    /// <summary>Hủy chỗ đang giữ (chưa thanh toán).</summary>
+    /// <summary>
+    /// Hủy giữ chỗ chưa thanh toán; booking đã thanh toán chỉ hủy nếu còn ít nhất 24 giờ,
+    /// payment chuyển sang refund_pending để Admin xử lý hoàn tiền.
+    /// </summary>
     [HttpPost("bookings/{bookingId:long}/cancel")]
     public async Task<ActionResult<ApiResponse<BookingDetailDto>>> Cancel(long bookingId, CancellationToken cancellationToken) =>
-        Ok(new ApiResponse<BookingDetailDto>(await service.CancelHoldAsync(User.GetUserId(), bookingId, cancellationToken)));
+        Ok(new ApiResponse<BookingDetailDto>(await service.CancelBookingAsync(User.GetUserId(), bookingId, cancellationToken)));
 }

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Linking, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { ActivityIndicator, Linking, Pressable, ScrollView, StyleSheet, type ScrollViewInstance, Text, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -86,7 +86,7 @@ export default function VenueDetailScreen({ navigation, route }: Props) {
   const maxHours = detail?.maxHours ?? 3;
 
   // Đổi ngày/môn thì cuộn lưới một lần, để hôm nay không mở ra toàn ô đã qua.
-  const gridScroll = useRef<ScrollView>(null);
+  const gridScroll = useRef<ScrollViewInstance>(null);
   const scrolledFor = useRef<string | null>(null);
   useEffect(() => {
     if (!detail || courts.length === 0) return;

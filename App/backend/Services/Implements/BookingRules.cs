@@ -12,6 +12,8 @@ public static class BookingRules
     public const int DefaultHoldMinutes = 10;
     public const string ExpiredHoldReason = "Hết thời gian giữ chỗ";
     public const string PlayerCancelReason = "Người chơi hủy giữ chỗ";
+    public const string PlayerPaidCancelReason = "Người chơi hủy booking trước giờ chơi ít nhất 24 giờ; chờ xử lý hoàn tiền";
+    public static readonly TimeSpan PaidBookingCancellationWindow = TimeSpan.FromHours(24);
 
     /// <summary>Thời điểm bắt đầu khung giờ theo giờ Việt Nam.</summary>
     public static DateTimeOffset SlotStart(DateOnly date, int hour) =>
@@ -30,6 +32,27 @@ public static class BookingRules
     /// </summary>
     public static string EffectiveStatus(string status, DateTimeOffset? holdExpiresAt, DateTimeOffset now) =>
         status == "pending" && (holdExpiresAt is null || holdExpiresAt <= now) ? "expired" : status;
+
+    /// <summary>Trả về quyền hủy và thông tin hiển thị; backend là nguồn quyết định cuối cùng.</summary>
+    public static (bool CanCancel, string? Info) CancellationAvailability(
+        string status, DateTimeOffset? holdExpiresAt, DateTimeOffset startAt, string? paymentStatus, DateTimeOffset now)
+    {
+        var effective = EffectiveStatus(status, holdExpiresAt, now);
+        if (effective == "pending")
+            return (true, "Bạn có thể hủy giữ chỗ trước khi hết thời gian.");
+        if (effective == "confirmed")
+        {
+            if (paymentStatus != "paid")
+                return (false, "Chưa tìm thấy giao dịch đã thanh toán cho booking này.");
+            if (startAt < now.Add(PaidBookingCancellationWindow))
+                return (false, "Chỉ có thể hủy booking đã thanh toán khi còn ít nhất 24 giờ trước giờ chơi.");
+            return (true, "Khi hủy, giao dịch sẽ chuyển sang chờ hoàn tiền để Admin xử lý.");
+        }
+        if (effective == "expired") return (false, "Thời gian giữ chỗ đã hết.");
+        if (effective == "cancelled") return (false, "Booking này đã được hủy.");
+        if (effective == "completed") return (false, "Booking đã hoàn thành nên không thể hủy.");
+        return (false, "Booking này hiện không thể hủy.");
+    }
 
     /// <summary>Hai khoảng [aStart, aEnd) và [bStart, bEnd) giao nhau — cùng điều kiện với trigger trg_bookings_no_overlap.</summary>
     public static bool Overlaps(DateTimeOffset aStart, DateTimeOffset aEnd, DateTimeOffset bStart, DateTimeOffset bEnd) =>

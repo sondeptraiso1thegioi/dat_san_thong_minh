@@ -150,20 +150,93 @@ public sealed class PlayerBookingServiceTests
     {
         var repo = new FakeRepo();
         repo.Add(View(7, userId: 4, "pending", Now.AddMinutes(minutesLeft)));
-        var result = await Service(repo).CancelHoldAsync(4, 7, default);
+        var result = await Service(repo).CancelBookingAsync(4, 7, default);
         Assert.Equal(("cancelled", reason), (result.Status, result.CancelReason));
         Assert.Equal(1, repo.Saves);
     }
 
     [Fact]
-    public async Task Paid_bookings_are_not_cancelled_here()
+    public async Task Confirmed_booking_can_be_cancelled_when_at_least_24_hours_remain_and_paid_payment_is_refunded_pending()
     {
         var repo = new FakeRepo();
-        repo.Add(View(7, userId: 4, "confirmed", null));
-        var error = await Assert.ThrowsAsync<ApiException>(() => Service(repo).CancelHoldAsync(4, 7, default));
-        Assert.Equal((409, "BOOKING_NOT_CANCELLABLE"), (error.StatusCode, error.Code));
+        var view = View(8, 4, "confirmed", null, paymentStatus: "paid") with
+        {
+            StartAt = Now.AddHours(24), EndAt = Now.AddHours(25)
+        };
+        repo.Add(view);
+
+        var result = await Service(repo).CancelBookingAsync(4, 8, default);
+
+        Assert.Equal("cancelled", result.Status);
+        Assert.Equal("refund_pending", result.PaymentStatus);
+        Assert.Equal(BookingRules.PlayerPaidCancelReason, result.CancelReason);
+        Assert.Equal(1, repo.Saves);
+    }
+
+    [Fact]
+    public async Task Confirmed_booking_cannot_be_cancelled_inside_24_hours()
+    {
+        var repo = new FakeRepo();
+        repo.Add(View(8, 4, "confirmed", null, paymentStatus: "paid"));
+        var error = await Assert.ThrowsAsync<ApiException>(() => Service(repo).CancelBookingAsync(4, 8, default));
+        Assert.Equal((409, "CANCELLATION_WINDOW_PASSED"), (error.StatusCode, error.Code));
         Assert.Equal(0, repo.Saves);
     }
+
+    [Fact]
+    public async Task Confirmed_booking_requires_a_paid_payment_record_before_cancellation()
+    {
+        var repo = new FakeRepo();
+        repo.Add(View(8, 4, "confirmed", null, paymentStatus: "pending") with
+        {
+            StartAt = Now.AddHours(30), EndAt = Now.AddHours(31)
+        });
+        var error = await Assert.ThrowsAsync<ApiException>(() => Service(repo).CancelBookingAsync(4, 8, default));
+        Assert.Equal((409, "PAID_PAYMENT_NOT_FOUND"), (error.StatusCode, error.Code));
+        Assert.Equal(0, repo.Saves);
+    }
+
+    [Theory]
+    [InlineData("upcoming", 2)]
+    [InlineData("history", 3)]
+    [InlineData("all", 5)]
+    public async Task Booking_list_filters_upcoming_and_history(string view, int expectedCount)
+    {
+        var repo = new FakeRepo();
+        repo.Add(View(1, 4, "pending", Now.AddMinutes(5)));
+        repo.Add(View(2, 4, "confirmed", null) with { StartAt = Now.AddHours(25), EndAt = Now.AddHours(26) });
+        repo.Add(View(3, 4, "confirmed", null) with { StartAt = Now.AddHours(-2), EndAt = Now.AddHours(-1) });
+        repo.Add(View(4, 4, "cancelled", null));
+        repo.Add(View(5, 4, "pending", Now.AddMinutes(-5)));
+
+        var result = await Service(repo).GetBookingsAsync(4, view, 1, 20, default);
+
+        Assert.Equal(expectedCount, result.TotalCount);
+        Assert.Equal(view, result.View);
+    }
+
+    [Fact]
+    public async Task Booking_list_hides_other_players_and_provides_cancellation_flags()
+    {
+        var repo = new FakeRepo();
+        repo.Add(View(1, 4, "pending", Now.AddMinutes(5)));
+        repo.Add(View(2, 5, "pending", Now.AddMinutes(5)));
+
+        var result = await Service(repo).GetBookingsAsync(4, "all", 1, 20, default);
+
+        Assert.Single(result.Items);
+        Assert.True(result.Items[0].CanCancel);
+    }
+
+    [Theory]
+    [InlineData("unknown", 1, "INVALID_BOOKING_VIEW")]
+    [InlineData("all", 0, "INVALID_PAGE")]
+    public async Task Booking_list_rejects_invalid_filters(string view, int page, string code)
+    {
+        var error = await Assert.ThrowsAsync<ApiException>(() => Service(new FakeRepo()).GetBookingsAsync(4, view, page, 20, default));
+        Assert.Equal(code, error.Code);
+    }
+
 
     [Theory]
     [InlineData("10", 10)]
@@ -180,9 +253,9 @@ public sealed class PlayerBookingServiceTests
     private static CreateBookingRequest Request(string courtId, DateOnly? date, int startHour, int hours) =>
         new() { CourtId = courtId, Date = date, StartHour = startHour, Hours = hours };
 
-    private static BookingView View(long id, long userId, string status, DateTimeOffset? holdExpiresAt) => new(
+    private static BookingView View(long id, long userId, string status, DateTimeOffset? holdExpiresAt, string? paymentStatus = null) => new(
         id, userId, status, 1, "Cụm sân A", "Cầu Giấy, Hà Nội", 21.045, 105.798, "Tennis 1", "tennis", "outdoor",
-        At(16), At(17), 120000, holdExpiresAt, null, Now.AddMinutes(-5));
+        At(16), At(17), 120000, holdExpiresAt, null, Now.AddMinutes(-5), paymentStatus);
 
     private static PlayerBookingService Service(FakeRepo repo, string? holdMinutes = null) =>
         new(new FakeUsers(), repo, new FakeSettings(holdMinutes), new FixedClock(Now));
@@ -249,9 +322,53 @@ public sealed class PlayerBookingServiceTests
             Task.FromResult(stored.TryGetValue(bookingId, out var x)
                 ? x.View with { Status = x.Entity.Status, CancelReason = x.Entity.CancelReason }
                 : null);
-        public Task<Booking?> GetOwnedForUpdateAsync(long bookingId, long userId, CancellationToken cancellationToken) =>
-            Task.FromResult(stored.TryGetValue(bookingId, out var x) && x.View.UserId == userId ? x.Entity : null);
-        public Task SaveChangesAsync(CancellationToken cancellationToken) { Saves++; return Task.CompletedTask; }
+
+        public Task<BookingPage> GetPlayerBookingsAsync(long userId, string view, int page, int pageSize,
+            DateTimeOffset now, CancellationToken cancellationToken)
+        {
+            var query = stored.Values.Where(x => x.View.UserId == userId);
+            query = view switch
+            {
+                "upcoming" => query.Where(x => (x.Entity.Status == "confirmed" && x.Entity.EndAt > now)
+                    || (x.Entity.Status == "pending" && x.Entity.HoldExpiresAt > now)),
+                "history" => query.Where(x => x.Entity.Status is "cancelled" or "completed"
+                    || (x.Entity.Status == "pending" && (x.Entity.HoldExpiresAt is null || x.Entity.HoldExpiresAt <= now))
+                    || (x.Entity.Status == "confirmed" && x.Entity.EndAt <= now)),
+                _ => query
+            };
+            var ordered = view == "upcoming"
+                ? query.OrderBy(x => x.Entity.StartAt)
+                : query.OrderByDescending(x => x.Entity.StartAt);
+            var all = ordered.Select(x => x.View with
+            {
+                Status = x.Entity.Status, HoldExpiresAt = x.Entity.HoldExpiresAt,
+                CancelReason = x.Entity.CancelReason
+            }).ToList();
+            return Task.FromResult(new BookingPage(all.Skip((page - 1) * pageSize).Take(pageSize).ToList(), all.Count));
+        }
+
+        public Task<CancelBookingResult> CancelOwnedBookingAsync(long bookingId, long userId, DateTimeOffset now,
+            CancellationToken cancellationToken)
+        {
+            if (!stored.TryGetValue(bookingId, out var x) || x.View.UserId != userId)
+                return Task.FromResult(CancelBookingResult.NotFound);
+            if (x.Entity.Status == "pending")
+            {
+                var expired = x.Entity.HoldExpiresAt is null || x.Entity.HoldExpiresAt <= now;
+                x.Entity.Status = "cancelled";
+                x.Entity.CancelReason = expired ? BookingRules.ExpiredHoldReason : BookingRules.PlayerCancelReason;
+                Saves++;
+                return Task.FromResult(CancelBookingResult.Cancelled);
+            }
+            if (x.Entity.Status != "confirmed") return Task.FromResult(CancelBookingResult.NotCancellable);
+            if (x.Entity.StartAt < now.AddHours(24)) return Task.FromResult(CancelBookingResult.TooLate);
+            if (x.View.PaymentStatus != "paid") return Task.FromResult(CancelBookingResult.PaidPaymentNotFound);
+            x.Entity.Status = "cancelled";
+            x.Entity.CancelReason = BookingRules.PlayerPaidCancelReason;
+            stored[bookingId] = (x.View with { PaymentStatus = "refund_pending" }, x.Entity);
+            Saves++;
+            return Task.FromResult(CancelBookingResult.Cancelled);
+        }
     }
 
     private sealed class FakeUsers : IUserRepository

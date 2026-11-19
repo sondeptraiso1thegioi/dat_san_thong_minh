@@ -13,8 +13,11 @@ public interface IPlayerBookingService
 
     Task<BookingDetailDto?> GetActiveHoldAsync(long userId, CancellationToken cancellationToken);
 
+    Task<PlayerBookingsResponse> GetBookingsAsync(
+        long userId, string view, int page, int pageSize, CancellationToken cancellationToken);
+
     Task<BookingDetailDto> GetBookingAsync(long userId, long bookingId, CancellationToken cancellationToken);
 
-    /// <summary>Hủy chỗ đang giữ (chưa thanh toán). Booking đã thanh toán hủy theo quy tắc 24 giờ ở bước Lịch đặt.</summary>
-    Task<BookingDetailDto> CancelHoldAsync(long userId, long bookingId, CancellationToken cancellationToken);
+    /// <summary>Hủy giữ chỗ hoặc booking đã xác nhận theo điều kiện 24 giờ.</summary>
+    Task<BookingDetailDto> CancelBookingAsync(long userId, long bookingId, CancellationToken cancellationToken);
 }

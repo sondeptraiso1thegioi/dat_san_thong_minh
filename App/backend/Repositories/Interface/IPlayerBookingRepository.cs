@@ -8,7 +8,11 @@ public sealed record BusyInterval(long CourtId, DateTimeOffset StartAt, DateTime
 public sealed record BookingView(
     long Id, long UserId, string Status, long VenueId, string VenueName, string VenueAddress, double Lat, double Lng,
     string CourtName, string Sport, string Environment, DateTimeOffset StartAt, DateTimeOffset EndAt, long Price,
-    DateTimeOffset? HoldExpiresAt, string? CancelReason, DateTimeOffset CreatedAt);
+    DateTimeOffset? HoldExpiresAt, string? CancelReason, DateTimeOffset CreatedAt, string? PaymentStatus = null);
+
+public sealed record BookingPage(IReadOnlyList<BookingView> Items, int TotalCount);
+
+public enum CancelBookingResult { Cancelled, NotFound, NotCancellable, TooLate, PaidPaymentNotFound }
 
 /// <summary>Busy: SQL Server chọn transaction này làm nạn nhân deadlock; người dùng chỉ cần thử lại.</summary>
 public enum HoldResult { Created, SlotTaken, Busy }
@@ -38,8 +42,14 @@ public interface IPlayerBookingRepository
 
     Task<BookingView?> GetViewAsync(long bookingId, CancellationToken cancellationToken);
 
-    /// <summary>Booking của người chơi để cập nhật (được theo dõi); null nếu không có hoặc của người khác.</summary>
-    Task<Booking?> GetOwnedForUpdateAsync(long bookingId, long userId, CancellationToken cancellationToken);
+    /// <summary>Danh sách booking của một người chơi, lọc và phân trang ở database.</summary>
+    Task<BookingPage> GetPlayerBookingsAsync(
+        long userId, string view, int page, int pageSize, DateTimeOffset now, CancellationToken cancellationToken);
 
-    Task SaveChangesAsync(CancellationToken cancellationToken);
+    /// <summary>
+    /// Hủy booking trong transaction. Booking pending được hủy trực tiếp; booking confirmed chỉ hủy khi
+    /// còn ít nhất 24 giờ và payment paid được chuyển sang refund_pending.
+    /// </summary>
+    Task<CancelBookingResult> CancelOwnedBookingAsync(
+        long bookingId, long userId, DateTimeOffset now, CancellationToken cancellationToken);
 }

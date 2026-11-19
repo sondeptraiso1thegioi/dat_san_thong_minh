@@ -46,7 +46,7 @@ export default function RootNavigator() {
       {session?.user.role === 'player' ? <>
           <Stack.Screen name="Player" component={PlayerTabs} navigationKey="player" />
           <Stack.Screen name="VenueDetail" component={VenueDetailScreen} options={({ route }) => ({ title: `${route.params.name} · Sun Sport` })} />
-          <Stack.Screen name="BookingHold" component={BookingHoldScreen} options={{ title: 'Giữ chỗ · Sun Sport' }} />
+          <Stack.Screen name="BookingHold" component={BookingHoldScreen} options={{ title: 'Chi tiết đặt sân · Sun Sport' }} />
         </>
         : session?.user.role === 'owner' ? <>
           <Stack.Screen name="Owner" component={OwnerTabs} navigationKey="owner" />

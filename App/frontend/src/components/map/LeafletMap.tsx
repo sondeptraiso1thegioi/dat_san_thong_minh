@@ -41,7 +41,7 @@ window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'ready' }));
 </script></body></html>`;
 
 export default function LeafletMap({ markers, user, radiusKm, onSelect, onMapPress, style }: LeafletMapProps) {
-  const webView = useRef<WebView>(null);
+  const webView = useRef<WebView<{}>>(null);
   const [ready, setReady] = useState(false);
   const payload = useMemo(() => JSON.stringify({
     markers: markers.map(m => ({ ...m, html: pinHtml(m) })),
@@ -65,7 +65,7 @@ export default function LeafletMap({ markers, user, radiusKm, onSelect, onMapPre
 
   return (
     <View style={[{ overflow: 'hidden' }, style]}>
-      <WebView
+      <WebView<{}>
         ref={webView}
         originWhitelist={['*']}
         source={{ html, baseUrl: 'https://sunsport.local/' }}

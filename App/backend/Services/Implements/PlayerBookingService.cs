@@ -128,6 +128,23 @@ public sealed class PlayerBookingService(
             : null;
     }
 
+    public async Task<PlayerBookingsResponse> GetBookingsAsync(
+        long userId, string view, int page, int pageSize, CancellationToken cancellationToken)
+    {
+        view = (view ?? "all").Trim().ToLowerInvariant();
+        if (view is not ("all" or "upcoming" or "history"))
+            throw Invalid("INVALID_BOOKING_VIEW", "view chỉ nhận all, upcoming hoặc history.");
+        if (page < 1 || (long)(page - 1) * pageSize > int.MaxValue)
+            throw Invalid("INVALID_PAGE", "page không hợp lệ.");
+        if (pageSize is < 1 or > 50) throw Invalid("INVALID_PAGE_SIZE", "pageSize phải từ 1 đến 50.");
+
+        var now = clock.GetUtcNow();
+        var result = await bookings.GetPlayerBookingsAsync(userId, view, page, pageSize, now, cancellationToken);
+        return new PlayerBookingsResponse(
+            result.Items.Select(v => ToListItem(v, now)).ToList(), page, pageSize, result.TotalCount,
+            result.TotalCount == 0 ? 0 : (int)Math.Ceiling(result.TotalCount / (double)pageSize), view, now);
+    }
+
     public async Task<BookingDetailDto> GetBookingAsync(long userId, long bookingId, CancellationToken cancellationToken)
     {
         var view = await bookings.GetViewAsync(bookingId, cancellationToken);
@@ -135,24 +152,44 @@ public sealed class PlayerBookingService(
         return ToDto(view, clock.GetUtcNow());
     }
 
-    public async Task<BookingDetailDto> CancelHoldAsync(long userId, long bookingId, CancellationToken cancellationToken)
+    public async Task<BookingDetailDto> CancelBookingAsync(long userId, long bookingId, CancellationToken cancellationToken)
     {
         var now = clock.GetUtcNow();
-        var booking = await bookings.GetOwnedForUpdateAsync(bookingId, userId, cancellationToken) ?? throw NotFound();
-        if (booking.Status != "pending")
-            throw new ApiException(409, "BOOKING_NOT_CANCELLABLE", "Chỉ hủy được chỗ đang giữ và chưa thanh toán.");
-
-        var expired = BookingRules.EffectiveStatus(booking.Status, booking.HoldExpiresAt, now) == "expired";
-        booking.Status = "cancelled";
-        booking.CancelReason = expired ? BookingRules.ExpiredHoldReason : BookingRules.PlayerCancelReason;
-        await bookings.SaveChangesAsync(cancellationToken);
+        var result = await bookings.CancelOwnedBookingAsync(bookingId, userId, now, cancellationToken);
+        switch (result)
+        {
+            case CancelBookingResult.NotFound:
+                throw NotFound();
+            case CancelBookingResult.NotCancellable:
+                throw new ApiException(409, "BOOKING_NOT_CANCELLABLE", "Booking đã hủy/hoàn thành hoặc không ở trạng thái có thể hủy.");
+            case CancelBookingResult.TooLate:
+                throw new ApiException(409, "CANCELLATION_WINDOW_PASSED", "Chỉ có thể hủy booking đã thanh toán khi còn ít nhất 24 giờ trước giờ chơi.");
+            case CancelBookingResult.PaidPaymentNotFound:
+                throw new ApiException(409, "PAID_PAYMENT_NOT_FOUND", "Không tìm thấy giao dịch đã thanh toán hợp lệ cho booking này.");
+        }
         return await GetBookingAsync(userId, bookingId, cancellationToken);
     }
 
-    private static BookingDetailDto ToDto(BookingView v, DateTimeOffset now) => new(
-        Id(v.Id), BookingRules.EffectiveStatus(v.Status, v.HoldExpiresAt, now), Id(v.VenueId), v.VenueName, v.VenueAddress,
-        v.Lat, v.Lng, v.CourtName, v.Sport, v.Environment, v.StartAt, v.EndAt,
-        (int)Math.Round((v.EndAt - v.StartAt).TotalHours), v.Price, v.HoldExpiresAt, v.CancelReason, v.CreatedAt, now);
+    private static PlayerBookingListItemDto ToListItem(BookingView v, DateTimeOffset now)
+    {
+        var status = BookingRules.EffectiveStatus(v.Status, v.HoldExpiresAt, now);
+        var cancellation = BookingRules.CancellationAvailability(status, v.HoldExpiresAt, v.StartAt, v.PaymentStatus, now);
+        return new PlayerBookingListItemDto(
+            Id(v.Id), status, Id(v.VenueId), v.VenueName, v.VenueAddress, v.CourtName, v.Sport, v.Environment,
+            v.StartAt, v.EndAt, (int)Math.Round((v.EndAt - v.StartAt).TotalHours), v.Price,
+            v.HoldExpiresAt, v.CancelReason, v.CreatedAt, v.PaymentStatus, cancellation.CanCancel, cancellation.Info);
+    }
+
+    private static BookingDetailDto ToDto(BookingView v, DateTimeOffset now)
+    {
+        var status = BookingRules.EffectiveStatus(v.Status, v.HoldExpiresAt, now);
+        var cancellation = BookingRules.CancellationAvailability(status, v.HoldExpiresAt, v.StartAt, v.PaymentStatus, now);
+        return new BookingDetailDto(
+            Id(v.Id), status, Id(v.VenueId), v.VenueName, v.VenueAddress,
+            v.Lat, v.Lng, v.CourtName, v.Sport, v.Environment, v.StartAt, v.EndAt,
+            (int)Math.Round((v.EndAt - v.StartAt).TotalHours), v.Price, v.HoldExpiresAt, v.CancelReason, v.CreatedAt, now,
+            v.PaymentStatus, cancellation.CanCancel, cancellation.Info);
+    }
 
     private static string Id(long id) => id.ToString(CultureInfo.InvariantCulture);
 

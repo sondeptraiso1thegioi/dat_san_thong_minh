@@ -17,7 +17,7 @@ type IconName = React.ComponentProps<typeof Ionicons>['name'];
 const statusView: Record<BookingStatus, { title: string; text: string; icon: IconName; color: string; background: string }> = {
   pending: { title: 'Đang giữ chỗ cho bạn', text: 'Hoàn tất thanh toán trước khi hết giờ để xác nhận sân.', icon: 'hourglass-outline', color: colors.green, background: colors.greenLight },
   expired: { title: 'Đã hết thời gian giữ chỗ', text: 'Khung giờ đã được nhả cho người khác. Bạn có thể chọn lại giờ.', icon: 'time-outline', color: '#7A5A10', background: '#FFF4D6' },
-  cancelled: { title: 'Đã hủy giữ chỗ', text: 'Khung giờ đã được nhả cho người khác.', icon: 'close-circle-outline', color: colors.error, background: colors.errorBackground },
+  cancelled: { title: 'Đã hủy đặt sân', text: 'Khung giờ đã được nhả cho người khác.', icon: 'close-circle-outline', color: colors.error, background: colors.errorBackground },
   confirmed: { title: 'Đã xác nhận đặt sân', text: 'Hẹn gặp bạn ở sân.', icon: 'checkmark-circle', color: colors.green, background: colors.greenLight },
   completed: { title: 'Đã chơi xong', text: 'Cảm ơn bạn đã đặt sân qua Sun Sport.', icon: 'trophy-outline', color: colors.green, background: colors.greenLight },
 };
@@ -62,7 +62,7 @@ export default function BookingHoldScreen({ navigation, route }: Props) {
     setCancelling(true);
     setError(null);
     try {
-      setBooking(await bookingService.cancelHold(bookingId));
+      setBooking(await bookingService.cancelBooking(bookingId));
       setConfirmCancel(false);
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : 'Chưa hủy được. Vui lòng thử lại.');
@@ -94,7 +94,7 @@ export default function BookingHoldScreen({ navigation, route }: Props) {
           onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Player')}>
           <Ionicons name="arrow-back" size={20} color={colors.green} />
         </Pressable>
-        <Text accessibilityRole="header" style={styles.topTitle}>Giữ chỗ</Text>
+        <Text accessibilityRole="header" style={styles.topTitle}>Chi tiết đặt sân</Text>
       </View>
 
       {!booking && !error && <View style={styles.center}><ActivityIndicator color={colors.green} /></View>}
@@ -128,6 +128,8 @@ export default function BookingHoldScreen({ navigation, route }: Props) {
               <Row icon={<Ionicons name="calendar-outline" size={16} color={colors.green} />} label="Ngày" value={formatDay(booking.startAt)} />
               <Row icon={<Ionicons name="time-outline" size={16} color={colors.green} />} label="Giờ"
                 value={`${formatTime(booking.startAt)}–${formatTime(booking.endAt)} (${booking.hours} giờ)`} />
+              {!!booking.paymentStatus && <Row icon={<Ionicons name="card-outline" size={16} color={colors.green} />}
+                label="Thanh toán" value={paymentLabel(booking.paymentStatus)} />}
               <View style={styles.divider} />
               <View style={styles.totalRow}>
                 <Text style={styles.totalLabel}>Tổng tiền</Text>
@@ -143,22 +145,35 @@ export default function BookingHoldScreen({ navigation, route }: Props) {
                   <Ionicons name="card-outline" size={18} color={colors.white} />
                   <Text style={styles.primaryText}>Thanh toán {formatPrice(booking.price)}</Text>
                 </Pressable>
-                <Text style={styles.note}>Thanh toán giả lập sẽ có ở bước tiếp theo. Hiện bạn có thể giữ hoặc hủy chỗ.</Text>
+                <Text style={styles.note}>Cổng thanh toán mô phỏng sẽ được tích hợp ở bước tiếp theo. Hiện bạn có thể hủy chỗ đang giữ.</Text>
+              </View>
+            )}
+
+            {status === 'confirmed' && !!booking.cancellationInfo && (
+              <Text style={styles.note}>{booking.cancellationInfo}</Text>
+            )}
+
+            {!!booking.canCancel && (status === 'pending' || status === 'confirmed') && (
+              <View style={styles.actions}>
                 {confirmCancel ? (
                   <View style={styles.confirm}>
-                    <Text style={styles.confirmText}>Hủy chỗ đang giữ? Khung giờ sẽ được nhả cho người khác.</Text>
+                    <Text style={styles.confirmText}>
+                      {status === 'pending'
+                        ? 'Hủy chỗ đang giữ? Khung giờ sẽ được nhả cho người khác.'
+                        : 'Bạn xác nhận hủy booking? Giao dịch sẽ chuyển sang chờ hoàn tiền để Admin xử lý.'}
+                    </Text>
                     <View style={styles.confirmButtons}>
                       <Pressable accessibilityRole="button" disabled={cancelling} onPress={() => setConfirmCancel(false)} style={styles.secondary}>
                         <Text style={styles.secondaryText}>Không</Text>
                       </Pressable>
                       <Pressable accessibilityRole="button" disabled={cancelling} onPress={() => void cancel()} style={[styles.danger, cancelling && styles.disabled]}>
-                        {cancelling ? <ActivityIndicator color={colors.white} /> : <Text style={styles.primaryText}>Hủy giữ chỗ</Text>}
+                        {cancelling ? <ActivityIndicator color={colors.white} /> : <Text style={styles.primaryText}>Xác nhận hủy</Text>}
                       </Pressable>
                     </View>
                   </View>
                 ) : (
                   <Pressable accessibilityRole="button" onPress={() => setConfirmCancel(true)} style={styles.secondary}>
-                    <Text style={styles.cancelText}>Hủy giữ chỗ</Text>
+                    <Text style={styles.cancelText}>{status === 'pending' ? 'Hủy giữ chỗ' : 'Hủy đặt sân'}</Text>
                   </Pressable>
                 )}
               </View>
@@ -175,6 +190,14 @@ export default function BookingHoldScreen({ navigation, route }: Props) {
       )}
     </SafeAreaView>
   );
+}
+
+function paymentLabel(status: string): string {
+  const labels: Record<string, string> = {
+    pending: 'Chờ thanh toán', paid: 'Đã thanh toán', failed: 'Thanh toán thất bại',
+    refund_pending: 'Chờ hoàn tiền', refunded: 'Đã hoàn tiền',
+  };
+  return labels[status] ?? status;
 }
 
 function Row({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {

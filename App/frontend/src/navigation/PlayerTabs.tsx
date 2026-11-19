@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AppTabBar, { TabConfig, WIDE_LAYOUT } from '../components/AppTabBar';
 import HomeScreen from '../screens/Player/HomeScreen';
 import SearchScreen from '../screens/Player/SearchScreen';
+import PlayerBookingsScreen from '../screens/Player/PlayerBookingsScreen';
 import { comingSoon } from '../screens/Player/ComingSoonScreen';
 import AccountScreen from '../screens/Auth/AccountScreen';
 import { PlayerTabRoutes } from './types';
@@ -19,7 +20,6 @@ const tabs: TabConfig = {
 };
 
 const SuggestScreen = comingSoon('Gợi ý cho bạn', 'sparkles-outline', 'Nhập nhu cầu bằng lời, nhận 5 gợi ý sân và giờ chơi kèm lý do và thời tiết.');
-const BookingsScreen = comingSoon('Lịch đặt của tôi', 'calendar-outline', 'Xem trận sắp tới, đã chơi, đã hủy; thanh toán tiếp hoặc hủy sân.');
 
 export default function PlayerTabs() {
   const { width } = useWindowDimensions();
@@ -32,7 +32,7 @@ export default function PlayerTabs() {
       <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Trang chủ · Sun Sport' }} />
       <Tab.Screen name="Search" component={SearchScreen} options={{ title: 'Tìm sân · Sun Sport' }} />
       <Tab.Screen name="Suggest" component={SuggestScreen} options={{ title: 'Gợi ý AI · Sun Sport' }} />
-      <Tab.Screen name="Bookings" component={BookingsScreen} options={{ title: 'Lịch đặt · Sun Sport' }} />
+      <Tab.Screen name="Bookings" component={PlayerBookingsScreen} options={{ title: 'Lịch đặt · Sun Sport' }} />
       <Tab.Screen name="Account" component={AccountScreen} options={{ title: 'Tài khoản · Sun Sport' }} />
     </Tab.Navigator>
   );

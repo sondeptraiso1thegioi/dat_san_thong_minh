@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { ActivityIndicator, Keyboard, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { ActivityIndicator, Keyboard, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, type TextInputInstance, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -45,10 +45,10 @@ function validate(values: Values): Partial<Record<Field, string>> {
 export default function RegisterScreen({ navigation }: Props) {
   const { width } = useWindowDimensions();
   const wide = width >= 720;
-  const phoneInput = useRef<TextInput>(null);
-  const emailInput = useRef<TextInput>(null);
-  const passwordInput = useRef<TextInput>(null);
-  const confirmInput = useRef<TextInput>(null);
+  const phoneInput = useRef<TextInputInstance>(null);
+  const emailInput = useRef<TextInputInstance>(null);
+  const passwordInput = useRef<TextInputInstance>(null);
+  const confirmInput = useRef<TextInputInstance>(null);
   const inFlight = useRef(false);
   const signUp = useAuthStore(state => state.signUp);
 

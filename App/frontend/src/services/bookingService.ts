@@ -1,6 +1,6 @@
 import axiosClient from '../api/axiosClient';
 import { ApiResponse } from '../types/auth';
-import { BookingDetail, CreateHoldInput, VenueDetail } from '../types/booking';
+import { BookingDetail, BookingListResponse, BookingListView, CreateHoldInput, VenueDetail } from '../types/booking';
 
 function data<T>(value: T | undefined | null, message: string): T {
   if (value === undefined || value === null) throw new Error(message);
@@ -33,13 +33,27 @@ export const bookingService = {
     return response.data?.data ?? null;
   },
 
+  async getBookings(view: BookingListView = 'all', page = 1, pageSize = 20): Promise<BookingListResponse> {
+    const response = await axiosClient.get<ApiResponse<BookingListResponse>>('/player/bookings', {
+      params: { view, page, pageSize },
+    });
+    const result = data(response.data?.data, 'Danh sách lịch đặt không hợp lệ.');
+    if (!Array.isArray(result.items)) throw new Error('Danh sách lịch đặt không hợp lệ.');
+    return result;
+  },
+
   async getBooking(id: string): Promise<BookingDetail> {
     const response = await axiosClient.get<ApiResponse<BookingDetail>>(bookingPath(id));
     return data(response.data?.data, 'Thông tin đặt sân không hợp lệ.');
   },
 
-  async cancelHold(id: string): Promise<BookingDetail> {
+  async cancelBooking(id: string): Promise<BookingDetail> {
     const response = await axiosClient.post<ApiResponse<BookingDetail>>(`${bookingPath(id)}/cancel`);
     return data(response.data?.data, 'Kết quả hủy không hợp lệ.');
+  },
+
+  /** Tương thích với các màn cũ đang gọi tên cancelHold. */
+  async cancelHold(id: string): Promise<BookingDetail> {
+    return this.cancelBooking(id);
   },
 };

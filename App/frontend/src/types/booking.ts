@@ -62,4 +62,40 @@ export interface BookingDetail {
   createdAt: string;
   /** Giờ máy chủ lúc trả lời, để đếm ngược không phụ thuộc đồng hồ điện thoại. */
   serverNow: string;
+  paymentStatus: string | null;
+  canCancel: boolean;
+  cancellationInfo: string | null;
+}
+
+export type BookingListView = 'all' | 'upcoming' | 'history';
+
+export interface BookingListItem {
+  id: string;
+  status: BookingStatus;
+  venueId: string;
+  venueName: string;
+  venueAddress: string;
+  courtName: string;
+  sport: Sport;
+  environment: CourtEnvironment;
+  startAt: string;
+  endAt: string;
+  hours: number;
+  price: number;
+  holdExpiresAt: string | null;
+  cancelReason: string | null;
+  createdAt: string;
+  paymentStatus: string | null;
+  canCancel: boolean;
+  cancellationInfo: string | null;
+}
+
+export interface BookingListResponse {
+  items: BookingListItem[];
+  page: number;
+  pageSize: number;
+  totalCount: number;
+  totalPages: number;
+  view: BookingListView;
+  serverNow: string;
 }

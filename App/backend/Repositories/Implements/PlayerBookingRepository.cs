@@ -1,3 +1,4 @@
+using System.Data;
 using DatSan.Api.Data;
 using DatSan.Api.Models;
 using DatSan.Api.Repositories.Interface;
@@ -98,11 +99,83 @@ public sealed class PlayerBookingRepository(AppDbContext db) : IPlayerBookingRep
             .Select(b => new BookingView(
                 b.Id, b.UserId, b.Status, b.Court!.VenueId, b.Court.Venue!.Name, b.Court.Venue.Address,
                 b.Court.Venue.Lat, b.Court.Venue.Lng, b.Court.Name, b.Court.Sport, b.Court.Environment,
-                b.StartAt, b.EndAt, b.Price, b.HoldExpiresAt, b.CancelReason, b.CreatedAt))
+                b.StartAt, b.EndAt, b.Price, b.HoldExpiresAt, b.CancelReason, b.CreatedAt,
+                db.Payments.Where(p => p.Type == "booking" && p.BookingId == b.Id)
+                    .OrderByDescending(p => p.Status == "paid" || p.Status == "refund_pending" || p.Status == "refunded")
+                    .ThenByDescending(p => p.Id).Select(p => p.Status).FirstOrDefault()))
             .SingleOrDefaultAsync(cancellationToken);
 
-    public Task<Booking?> GetOwnedForUpdateAsync(long bookingId, long userId, CancellationToken cancellationToken) =>
-        db.Bookings.SingleOrDefaultAsync(b => b.Id == bookingId && b.UserId == userId, cancellationToken);
+    public async Task<BookingPage> GetPlayerBookingsAsync(
+        long userId, string view, int page, int pageSize, DateTimeOffset now, CancellationToken cancellationToken)
+    {
+        var query = db.Bookings.AsNoTracking().Where(b => b.UserId == userId);
+        query = view switch
+        {
+            "upcoming" => query.Where(b =>
+                (b.Status == "confirmed" && b.EndAt > now)
+                || (b.Status == "pending" && b.HoldExpiresAt > now)),
+            "history" => query.Where(b => b.Status == "cancelled" || b.Status == "completed"
+                || (b.Status == "pending" && (b.HoldExpiresAt == null || b.HoldExpiresAt <= now))
+                || (b.Status == "confirmed" && b.EndAt <= now)),
+            _ => query
+        };
 
-    public Task SaveChangesAsync(CancellationToken cancellationToken) => db.SaveChangesAsync(cancellationToken);
+        var total = await query.CountAsync(cancellationToken);
+        var ordered = view == "upcoming"
+            ? query.OrderBy(b => b.StartAt).ThenByDescending(b => b.Id)
+            : query.OrderByDescending(b => b.StartAt).ThenByDescending(b => b.Id);
+
+        var items = await ordered.Skip((page - 1) * pageSize).Take(pageSize)
+            .Select(b => new BookingView(
+                b.Id, b.UserId, b.Status, b.Court!.VenueId, b.Court.Venue!.Name, b.Court.Venue.Address,
+                b.Court.Venue.Lat, b.Court.Venue.Lng, b.Court.Name, b.Court.Sport, b.Court.Environment,
+                b.StartAt, b.EndAt, b.Price, b.HoldExpiresAt, b.CancelReason, b.CreatedAt,
+                db.Payments.Where(p => p.Type == "booking" && p.BookingId == b.Id)
+                    .OrderByDescending(p => p.Status == "paid" || p.Status == "refund_pending" || p.Status == "refunded")
+                    .ThenByDescending(p => p.Id).Select(p => p.Status).FirstOrDefault()))
+            .ToListAsync(cancellationToken);
+
+        return new BookingPage(items, total);
+    }
+
+    public async Task<CancelBookingResult> CancelOwnedBookingAsync(
+        long bookingId, long userId, DateTimeOffset now, CancellationToken cancellationToken)
+    {
+        // Serializability + row lock prevents two cancellation requests from racing on the same booking/payment.
+        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
+        var booking = await db.Bookings
+            .FromSqlInterpolated($"SELECT * FROM dbo.bookings WITH (UPDLOCK, HOLDLOCK) WHERE id = {bookingId} AND user_id = {userId}")
+            .SingleOrDefaultAsync(cancellationToken);
+
+        if (booking is null) return CancelBookingResult.NotFound;
+
+        if (booking.Status == "pending")
+        {
+            var expired = booking.HoldExpiresAt is null || booking.HoldExpiresAt <= now;
+            booking.Status = "cancelled";
+            booking.CancelReason = expired ? BookingRules.ExpiredHoldReason : BookingRules.PlayerCancelReason;
+            await db.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+            return CancelBookingResult.Cancelled;
+        }
+
+        if (booking.Status != "confirmed") return CancelBookingResult.NotCancellable;
+        if (booking.StartAt < now.AddHours(24)) return CancelBookingResult.TooLate;
+
+        var payment = await db.Payments
+            .Where(p => p.Type == "booking" && p.BookingId == booking.Id && p.Status == "paid")
+            .OrderByDescending(p => p.Id)
+            .FirstOrDefaultAsync(cancellationToken);
+        if (payment is null || payment.Status != "paid") return CancelBookingResult.PaidPaymentNotFound;
+
+        payment.Status = "refund_pending";
+        // Schema constraint chỉ cho payout_status 'none' hoặc 'paid' khi payment chờ hoàn tiền.
+        if (payment.PayoutStatus == "pending") payment.PayoutStatus = "none";
+        booking.Status = "cancelled";
+        booking.CancelReason = BookingRules.PlayerPaidCancelReason;
+
+        await db.SaveChangesAsync(cancellationToken);
+        await transaction.CommitAsync(cancellationToken);
+        return CancelBookingResult.Cancelled;
+    }
 }

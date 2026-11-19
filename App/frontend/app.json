@@ -6,7 +6,6 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "scheme": "sunsport",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -25,7 +24,10 @@
         {
           "locationWhenInUsePermission": "Sun Sport dùng vị trí của bạn để tìm sân gần nhất."
         }
-      ]
+      ],
+      "expo-asset",
+      "expo-font",
+      "expo-status-bar"
     ]
   }
 }
