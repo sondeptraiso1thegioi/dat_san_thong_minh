@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2800" height="2100" viewBox="0 0 2800 2100" role="img" aria-labelledby="title description">
+<title id="title">Kiến trúc hệ thống đặt sân thể thao thông minh</title>
+<desc id="description">Ba vai trò dùng ứng dụng Expo, kết nối backend ASP.NET Core theo tầng, SQL Server, MinIO, PaymentGateway giả lập, bản đồ, Open-Meteo và LLM tùy chọn. Đây là kiến trúc mục tiêu; hiện đã có đăng nhập và hồ sơ phiên kết nối database thật.</desc>
+<rect width="2800" height="2100" fill="white"/>
+<text x="1400" y="84.45" font-family="Segoe UI, Arial, sans-serif" font-size="46" font-weight="700" text-anchor="middle" fill="#163E35">KIẾN TRÚC HỆ THỐNG</text>
+<text x="1400" y="133.1" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="400" text-anchor="middle" fill="#667B7D">Ứng dụng đặt sân thể thao thông minh  ·  Kiến trúc mục tiêu toàn dự án</text>
+<rect x="80" y="175" width="510" height="105" fill="#F2F6F4" stroke="#CDDAD4" stroke-width="2"/>
+<text x="335" y="221.175" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle" fill="#235745">NGƯỜI CHƠI</text>
+<text x="335" y="261.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#5E7470">Tìm sân · đặt sân · thanh toán</text>
+<polyline points="335,280 335,312" fill="none" stroke="#617681" stroke-width="3"/>
+<rect x="655" y="175" width="510" height="105" fill="#F2F6F4" stroke="#CDDAD4" stroke-width="2"/>
+<text x="910" y="221.175" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle" fill="#235745">CHỦ SÂN</text>
+<text x="910" y="261.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#5E7470">Quản lý sân · doanh thu · VIP</text>
+<polyline points="910,280 910,312" fill="none" stroke="#617681" stroke-width="3"/>
+<rect x="1230" y="175" width="510" height="105" fill="#F2F6F4" stroke="#CDDAD4" stroke-width="2"/>
+<text x="1485" y="221.175" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle" fill="#235745">QUẢN TRỊ VIÊN</text>
+<text x="1485" y="261.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#5E7470">Kiểm duyệt · đối soát · cấu hình</text>
+<polyline points="1485,280 1485,312" fill="none" stroke="#617681" stroke-width="3"/>
+<polyline points="335,312 1485,312" fill="none" stroke="#617681" stroke-width="3"/>
+<polyline points="910,312 910,350" fill="none" stroke="#617681" stroke-width="3"/>
+<polygon points="910,350 917,335 903,335" fill="#617681"/>
+<rect x="80" y="350" width="1660" height="310" fill="#F1F7F4" stroke="#8FB5A6" stroke-width="3"/>
+<text x="910" y="405.7" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700" text-anchor="middle" fill="#1D5945">FRONTEND  ·  React Native + Expo + TypeScript</text>
+<text x="910" y="446.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="middle" fill="#55786B">Một codebase cho mobile và web  ·  App/frontend</text>
+<rect x="116" y="485" width="514" height="145" fill="#FFFFFF" stroke="#CDDFD6" stroke-width="2"/>
+<text x="373" y="529.025" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="700" text-anchor="middle" fill="#234E40">Giao diện và điều hướng</text>
+<text x="373" y="573.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#58726A">Màn hình theo vai trò</text>
+<text x="373" y="613.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#58726A">React Navigation</text>
+<rect x="654" y="485" width="514" height="145" fill="#FFFFFF" stroke="#CDDFD6" stroke-width="2"/>
+<text x="911" y="529.025" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="700" text-anchor="middle" fill="#234E40">Trạng thái và gọi API</text>
+<text x="911" y="573.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#58726A">Zustand · Axios</text>
+<text x="911" y="613.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#58726A">Services / Store / API client</text>
+<rect x="1192" y="485" width="514" height="145" fill="#FFFFFF" stroke="#CDDFD6" stroke-width="2"/>
+<text x="1449" y="529.025" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="700" text-anchor="middle" fill="#234E40">Phiên đăng nhập và bản đồ</text>
+<text x="1449" y="573.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#58726A">SecureStore / sessionStorage</text>
+<text x="1449" y="613.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#58726A">react-native-maps / Leaflet</text>
+<polyline points="1050,660 1050,840" fill="none" stroke="#2F6486" stroke-width="3"/>
+<polygon points="1050,840 1057,825 1043,825" fill="#2F6486"/>
+<text x="1084" y="743.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="start" fill="#2F6486">HTTP(S) · REST / JSON · JWT</text>
+<polyline points="675,840 675,660" fill="none" stroke="#3D8B7D" stroke-width="3" stroke-dasharray="12 9"/>
+<polygon points="675,660 668,675 682,675" fill="#3D8B7D"/>
+<text x="390" y="757.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#3D8B7D">SignalR: cập nhật lịch trống</text>
+<rect x="80" y="840" width="1660" height="640" fill="#F1F5FA" stroke="#8DA9C2" stroke-width="3"/>
+<text x="910" y="894.625" font-family="Segoe UI, Arial, sans-serif" font-size="35" font-weight="700" text-anchor="middle" fill="#274F70">BACKEND  ·  ASP.NET Core Web API (.NET 8 / C#)</text>
+<text x="910" y="938.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="middle" fill="#607D94">REST API · SignalR · Dependency Injection  |  App/backend</text>
+<rect x="116" y="977" width="1588" height="74" fill="#FFFFFF" stroke="#C5D4E1" stroke-width="2"/>
+<text x="910" y="1023.1" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#315A7B">Controllers · DTOs · JWT Bearer · Phân quyền player / owner / admin</text>
+<polyline points="615,1051 615,1085" fill="none" stroke="#7191AE" stroke-width="3"/>
+<polygon points="615,1085 622,1070 608,1070" fill="#7191AE"/>
+<polyline points="1423,1051 1423,1085" fill="none" stroke="#7191AE" stroke-width="3"/>
+<polygon points="1423,1085 1430,1070 1416,1070" fill="#7191AE"/>
+<rect x="116" y="1085" width="995" height="182" fill="#FFFFFF" stroke="#C5D4E1" stroke-width="2"/>
+<text x="613" y="1130.175" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle" fill="#315A7B">DỊCH VỤ NGHIỆP VỤ</text>
+<text x="613" y="1180.025" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="400" text-anchor="middle" fill="#5B7489">Tài khoản · cụm sân · sân con · bảng giá · đặt sân</text>
+<text x="613" y="1231.025" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="400" text-anchor="middle" fill="#5B7489">Thanh toán · VIP · doanh thu · quản trị</text>
+<rect x="1143" y="1085" width="561" height="182" fill="#F5F1FA" stroke="#C1AED2" stroke-width="2"/>
+<text x="1423" y="1130.175" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle" fill="#665180">GỢI Ý SÂN (C#)</text>
+<text x="1423" y="1178.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="middle" fill="#7A668F">Lọc ứng viên · chấm điểm</text>
+<text x="1423" y="1229.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="middle" fill="#7A668F">Kết hợp thời tiết · sinh lý do</text>
+<polyline points="615,1267 615,1310" fill="none" stroke="#7191AE" stroke-width="3"/>
+<polygon points="615,1310 622,1295 608,1295" fill="#7191AE"/>
+<polyline points="1423,1267 1423,1310" fill="none" stroke="#7191AE" stroke-width="3"/>
+<polygon points="1423,1310 1430,1295 1416,1295" fill="#7191AE"/>
+<rect x="116" y="1310" width="1588" height="90" fill="#FFFFFF" stroke="#C5D4E1" stroke-width="2"/>
+<text x="910" y="1349.175" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle" fill="#315A7B">Repositories  →  Entity Framework Core 8  →  AppDbContext</text>
+<text x="910" y="1385.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#607D94">Truy cập database-first theo schema SQL Server có sẵn</text>
+<text x="910" y="1448.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#607D94">Tác vụ nền dự kiến: hết hạn giữ chỗ · hết hạn VIP</text>
+<polyline points="610,1480 610,1650" fill="none" stroke="#46697C" stroke-width="3"/>
+<polygon points="610,1650 617,1635 603,1635" fill="#46697C"/>
+<text x="650" y="1574.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="start" fill="#46697C">Dữ liệu nghiệp vụ · EF Core</text>
+<polyline points="1475,1480 1475,1650" fill="none" stroke="#46697C" stroke-width="3"/>
+<polygon points="1475,1650 1482,1635 1468,1635" fill="#46697C"/>
+<text x="1503" y="1590.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#46697C">S3 SDK: lưu / đọc ảnh</text>
+<rect x="80" y="1650" width="1060" height="260" fill="#F3F6F8" stroke="#A6BAC5" stroke-width="3"/>
+<text x="610" y="1698.475" font-family="Segoe UI, Arial, sans-serif" font-size="33" font-weight="700" text-anchor="middle" fill="#315768">SQL SERVER  ·  DatSanThongMinh</text>
+<text x="610" y="1747.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="middle" fill="#5C7580">users · venues · courts · price_rules</text>
+<text x="610" y="1791.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#5C7580">bookings · payments · vip_plans · vip_subscriptions</text>
+<text x="610" y="1836.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#5C7580">weather_cache · suggestion_logs · ai_settings · reports</text>
+<text x="610" y="1889.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle" fill="#315768">Ràng buộc · trigger · transaction chống trùng lịch</text>
+<rect x="1210" y="1650" width="530" height="260" fill="#F3F6F8" stroke="#A6BAC5" stroke-width="3"/>
+<text x="1475" y="1716.55" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" text-anchor="middle" fill="#315768">MINIO</text>
+<text x="1475" y="1773.025" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="400" text-anchor="middle" fill="#5C7580">Object Storage · S3 API</text>
+<text x="1475" y="1822.025" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="400" text-anchor="middle" fill="#5C7580">Lưu ảnh cụm sân</text>
+<text x="1475" y="1867.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#5C7580">Backend quản lý upload</text>
+<rect x="2160" y="350" width="560" height="250" fill="#F0F7FA" stroke="#A1BEC9" stroke-width="3"/>
+<text x="2440" y="404.25" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" fill="#3B697C">BẢN ĐỒ &amp; CHỈ ĐƯỜNG</text>
+<text x="2440" y="463.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#607E8B">OpenStreetMap: bản đồ web</text>
+<text x="2440" y="508.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#607E8B">Google Maps: mở link chỉ đường</text>
+<text x="2440" y="566.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#607E8B">Kết nối trực tiếp từ ứng dụng</text>
+<polyline points="1740,450 2160,450" fill="none" stroke="#5D8AA0" stroke-width="3"/>
+<polygon points="2160,450 2145,443 2145,457" fill="#5D8AA0"/>
+<text x="1950" y="435.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#5D8AA0">Bản đồ / chỉ đường</text>
+<rect x="2160" y="840" width="560" height="360" fill="#FFF7EC" stroke="#C9A678" stroke-width="3"/>
+<text x="2440" y="897.4" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#8D6029">PAYMENTGATEWAY</text>
+<text x="2440" y="944.1" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#8D6029">GIẢ LẬP NHƯ CINEMA</text>
+<text x="2440" y="1002.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="middle" fill="#92774F">ASP.NET Core .NET 8</text>
+<text x="2440" y="1048.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#92774F">Tạo bill / QR · nút trả tiền demo</text>
+<text x="2440" y="1096.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="middle" fill="#92774F">Chữ ký HMAC-SHA256</text>
+<text x="2440" y="1148.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#92774F">Đặt sân / mua VIP</text>
+<polyline points="1740,600 1950,600 1950,760 2440,760 2440,840" fill="none" stroke="#B28A55" stroke-width="3" stroke-dasharray="12 9"/>
+<polygon points="2440,840 2447,825 2433,825" fill="#B28A55"/>
+<text x="2300" y="740.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#A47B45">Nút thanh toán demo</text>
+<polyline points="1740,977 2160,977" fill="none" stroke="#A77D44" stroke-width="3"/>
+<polygon points="2160,977 2145,970 2145,984" fill="#A77D44"/>
+<text x="1950" y="960.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#A77D44">Tạo bill (HMAC)</text>
+<polyline points="2160,1100 1740,1100" fill="none" stroke="#A77D44" stroke-width="3"/>
+<polygon points="1740,1100 1755,1107 1755,1093" fill="#A77D44"/>
+<text x="1950" y="1083.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#A77D44">Callback (HMAC)</text>
+<rect x="2160" y="1280" width="560" height="195" fill="#F5F1FA" stroke="#C1AED2" stroke-width="3"/>
+<text x="2440" y="1332.325" font-family="Segoe UI, Arial, sans-serif" font-size="31" font-weight="700" text-anchor="middle" fill="#665180">OPEN-METEO</text>
+<text x="2440" y="1389.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="middle" fill="#7A668F">Dự báo thời tiết theo giờ</text>
+<text x="2440" y="1436.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#7A668F">Cache tại weather_cache</text>
+<polyline points="1704,1175 1830,1175 1830,1378 2160,1378" fill="none" stroke="#8D76A7" stroke-width="3"/>
+<polygon points="2160,1378 2145,1371 2145,1385" fill="#8D76A7"/>
+<text x="1995" y="1359.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#8D76A7">Dự báo theo giờ</text>
+<rect x="2160" y="1550" width="560" height="210" fill="#F5F1FA" stroke="#C1AED2" stroke-width="3"/>
+<text x="2440" y="1604.325" font-family="Segoe UI, Arial, sans-serif" font-size="31" font-weight="700" text-anchor="middle" fill="#665180">LLM API (TÙY CHỌN)</text>
+<text x="2440" y="1660.025" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="400" text-anchor="middle" fill="#7A668F">Gemini hoặc Claude</text>
+<text x="2440" y="1707.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#7A668F">Hiểu câu nhập → dữ liệu cấu trúc</text>
+<polyline points="1704,1230 1780,1230 1780,1655 2160,1655" fill="none" stroke="#8D76A7" stroke-width="3" stroke-dasharray="12 9"/>
+<polygon points="2160,1655 2145,1648 2145,1662" fill="#8D76A7"/>
+<text x="1970" y="1630.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="middle" fill="#8D76A7">Hiểu câu nhập (tùy chọn)</text>
+<text x="2440" y="1840.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#7A668F">Người dùng tự cấu hình AI / thời tiết</text>
+<text x="2440" y="1879.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#7A668F">theo hướng dẫn khi triển khai.</text>
+<polyline points="80,1970 2720,1970" fill="none" stroke="#D9E2E4" stroke-width="3"/>
+<text x="80" y="2020.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" text-anchor="start" fill="#49656D">HIỆN TẠI: đăng nhập 3 vai trò và hồ sơ phiên → API JWT → SQL Server thật. Các phần còn lại là kiến trúc dự kiến.</text>
+<text x="80" y="2066.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#71858B">Mũi tên chỉ hướng khởi tạo yêu cầu / gửi thông báo; phản hồi được trả trên cùng kết nối. Nét đứt: kênh bổ trợ hoặc tùy chọn.</text>
+</svg>

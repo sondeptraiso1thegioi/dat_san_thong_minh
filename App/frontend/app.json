@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Sun Sport — Đặt sân",
+    "slug": "sun-sport",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "sunsport",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "vn.sunsport.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "name": "Sun Sport",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Sun Sport dùng vị trí của bạn để tìm sân gần nhất."
+        }
+      ]
+    ]
+  }
+}

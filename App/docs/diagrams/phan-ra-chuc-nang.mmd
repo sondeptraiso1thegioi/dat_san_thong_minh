@@ -1,0 +1,61 @@
+flowchart TB
+    root["0. HỆ THỐNG ĐẶT SÂN THỂ THAO THÔNG MINH"]
+    f1["1. Quản lý tài khoản<br/>CHỨC NĂNG CHUNG"]
+    root --- f1
+    f1_1["1.1 Đăng ký tài khoản<br/>Dành cho người chơi và chủ sân"]
+    f1 --- f1_1
+    f1_2["1.2 Đăng nhập, đăng xuất<br/>Truy cập theo vai trò tài khoản"]
+    f1 --- f1_2
+    f1_3["1.3 Quản lý hồ sơ cá nhân<br/>Thông tin liên hệ và địa chỉ"]
+    f1 --- f1_3
+    f1_4["1.4 Cập nhật vị trí<br/>Ghim vị trí trên bản đồ"]
+    f1 --- f1_4
+    style f1 fill:#526677,color:#fff,stroke:#526677
+    f2["2. Tìm và đặt sân<br/>NGƯỜI CHƠI"]
+    root --- f2
+    f2_1["2.1 Tìm kiếm sân<br/>Theo môn, vị trí và khoảng cách"]
+    f2 --- f2_1
+    f2_2["2.2 Xem thông tin sân<br/>Chi tiết, giá, tiện ích, sân VIP"]
+    f2 --- f2_2
+    f2_3["2.3 Nhận gợi ý sân thông minh<br/>Theo nhu cầu, thời tiết, lịch sử"]
+    f2 --- f2_3
+    f2_4["2.4 Tra cứu và đặt sân<br/>Chọn sân, ngày, giờ trống; giữ chỗ"]
+    f2 --- f2_4
+    f2_5["2.5 Thanh toán đặt sân<br/>Thanh toán QR giả lập như Cinema"]
+    f2 --- f2_5
+    f2_6["2.6 Quản lý lịch đặt sân<br/>Xem lịch sử và hủy yêu cầu"]
+    f2 --- f2_6
+    f2_7["2.7 Xem bản đồ, chỉ đường<br/>Mở chỉ đường bằng Google Maps"]
+    f2 --- f2_7
+    style f2 fill:#226851,color:#fff,stroke:#226851
+    f3["3. Quản lý kinh doanh sân<br/>CHỦ SÂN"]
+    root --- f3
+    f3_1["3.1 Đăng ký, cập nhật cụm sân<br/>Ảnh, vị trí, tiện ích, giờ mở cửa"]
+    f3 --- f3_1
+    f3_2["3.2 Quản lý sân con<br/>Môn thể thao, mái che, trạng thái"]
+    f3 --- f3_2
+    f3_3["3.3 Thiết lập bảng giá<br/>Theo khung giờ và ngày trong tuần"]
+    f3 --- f3_3
+    f3_4["3.4 Quản lý đơn đặt sân<br/>Xem, xác nhận và hủy đơn"]
+    f3 --- f3_4
+    f3_5["3.5 Theo dõi doanh thu<br/>Tổng thu, hoa hồng và thực nhận"]
+    f3 --- f3_5
+    f3_6["3.6 Mua và quản lý VIP<br/>Thanh toán giả lập, thời hạn gói"]
+    f3 --- f3_6
+    style f3 fill:#936229,color:#fff,stroke:#936229
+    f4["4. Quản trị hệ thống<br/>QUẢN TRỊ VIÊN"]
+    root --- f4
+    f4_1["4.1 Kiểm duyệt, quản lý sân<br/>Duyệt, từ chối, chỉnh sửa, ẩn sân"]
+    f4 --- f4_1
+    f4_2["4.2 Quản lý người dùng<br/>Xem và khóa tài khoản"]
+    f4 --- f4_2
+    f4_3["4.3 Quản lý gói VIP<br/>Giá, thời hạn và trạng thái"]
+    f4 --- f4_3
+    f4_4["4.4 Thống kê hoạt động<br/>Lưu lượng theo giờ, ngày và sân"]
+    f4 --- f4_4
+    f4_5["4.5 Đối soát và hoàn tiền<br/>Trả chủ sân, hoàn tiền giả lập"]
+    f4 --- f4_5
+    f4_6["4.6 Cấu hình hệ thống<br/>Trọng số AI, thời tiết, hoa hồng"]
+    f4 --- f4_6
+    style f4 fill:#5F527F,color:#fff,stroke:#5F527F
+    style root fill:#163E35,color:#fff,stroke:#163E35

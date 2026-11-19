@@ -1,0 +1,4 @@
+Dữ liệu trên giao diện lấy từ đâu: làm frond đến đâu bạn giúp tôi làm back và khớp api luôn
+Thanh toán: VNPay hay cổng giả lập làm giống cinema, báo cóa sẽ sửa lại sau
+Quy tắc hủy sân đã thanh toán. Báo cáo chỉ ghi “hủy sân”, không ghi được hủy trước bao lâu và có hoàn tiền không. Đề xuất: hủy trước giờ chơi từ 24 giờ trở lên thì được, payment chuyển sang refund_pending để admin hoàn; dưới 24 giờ thì không cho hủy. Booking chưa thanh toán thì hủy lúc nào cũng được. đồng ý
+Bản đồ. react-native-maps trên Android dùng Google Maps SDK, phải có API key gắn tài khoản thanh toán, trái với mục “không phát sinh chi phí” trong báo cáo. Gói này cũng không chạy trên web. [Có khả năng cao] Tôi đề xuất dùng Leaflet + OpenStreetMap hiển thị qua WebView trên điện thoại và trực tiếp trên web: một cách cho cả hai nền tảng, miễn phí. đồng ý

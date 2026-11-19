@@ -1,0 +1,57 @@
+flowchart TB
+    player["Người chơi"]
+    owner["Chủ sân"]
+    admin["Quản trị viên"]
+
+    subgraph frontend["FRONTEND — App/frontend"]
+        app["React Native + Expo + TypeScript<br/>Mobile và web · React Navigation"]
+        client["Zustand · Axios<br/>SecureStore / sessionStorage"]
+        maps["react-native-maps / Leaflet"]
+        app --- client
+        app --- maps
+    end
+    player --> app
+    owner --> app
+    admin --> app
+
+    subgraph backend["BACKEND — ASP.NET Core .NET 8 / C# — App/backend"]
+        api["Controllers · DTOs<br/>JWT Bearer · Phân quyền player / owner / admin"]
+        services["Services: tài khoản, sân, giá, đặt sân<br/>thanh toán, VIP, doanh thu, quản trị"]
+        ai["Recommendation — C#<br/>Lọc ứng viên · chấm điểm · sinh lý do"]
+        realtime["SignalR Hub<br/>Làm mới lịch trống"]
+        jobs["Tác vụ nền<br/>Hết hạn giữ chỗ / VIP"]
+        data["Repositories → EF Core 8 → AppDbContext<br/>Database-first theo schema có sẵn"]
+        api --> services
+        api --> ai
+        services --> data
+        ai --> data
+        services --> realtime
+        jobs --> data
+    end
+
+    client -->|"HTTP(S) · REST / JSON · JWT"| api
+    realtime -.->|"Cập nhật lịch trống"| app
+    sql[("SQL Server · DatSanThongMinh<br/>12 bảng · ràng buộc / trigger / transaction")]
+    minio[("MinIO · S3 API<br/>Ảnh cụm sân")]
+    data --> sql
+    services -->|"S3 SDK"| minio
+
+    gateway["PaymentGateway giả lập như Cinema<br/>ASP.NET Core .NET 8<br/>Tạo bill / QR · đối chiếu bill đã lưu"]
+    services -->|"Tạo bill · HMAC-SHA256"| gateway
+    app -.->|"Nút thanh toán demo / user-pay"| gateway
+    gateway -->|"Callback · HMAC-SHA256"| api
+    app -->|"Đọc trạng thái từ backend"| api
+
+    weather["Open-Meteo<br/>Dự báo thời tiết theo giờ"]
+    llm["LLM tùy chọn: Gemini hoặc Claude<br/>Hiểu câu nhập → dữ liệu cấu trúc"]
+    publicMaps["OpenStreetMap: bản đồ web<br/>Google Maps: mở link chỉ đường"]
+    ai -->|"Dự báo; cache trong SQL Server"| weather
+    ai -.->|"Hiểu câu nhập nếu được cấu hình"| llm
+    maps --> publicMaps
+
+    style frontend fill:#F1F7F4,stroke:#8FB5A6,color:#1D5945
+    style backend fill:#F1F5FA,stroke:#8DA9C2,color:#274F70
+    style gateway fill:#FFF7EC,stroke:#C9A678,color:#8D6029
+    style ai fill:#F5F1FA,stroke:#C1AED2,color:#665180
+    style weather fill:#F5F1FA,stroke:#C1AED2,color:#665180
+    style llm fill:#F5F1FA,stroke:#C1AED2,color:#665180

@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1590" viewBox="0 0 2560 1590" role="img" aria-labelledby="title description">
+<title id="title">Biểu đồ phân rã chức năng hệ thống đặt sân thể thao thông minh</title>
+<desc id="description">Cây phân rã gồm bốn nhóm: quản lý tài khoản, tìm và đặt sân, quản lý kinh doanh sân và quản trị hệ thống. Đây là phạm vi dự kiến của toàn bộ dự án.</desc>
+<rect width="2560" height="1590" fill="white"/>
+<text x="1280" y="84.225" font-family="Segoe UI, Arial, sans-serif" font-size="43" font-weight="700" text-anchor="middle" fill="#163E35">BIỂU ĐỒ PHÂN RÃ CHỨC NĂNG</text>
+<text x="1280" y="128.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#617176">Tennis  ·  Pickleball  ·  Cầu lông  ·  Bóng bàn</text>
+<rect x="710" y="170" width="1140" height="108" fill="#163E35"/>
+<text x="1280" y="233.475" font-family="Segoe UI, Arial, sans-serif" font-size="33" font-weight="700" text-anchor="middle" fill="#FFFFFF">0. HỆ THỐNG ĐẶT SÂN THỂ THAO THÔNG MINH</text>
+<line x1="1280" y1="278" x2="1280" y2="320" stroke="#A6B2B9" stroke-width="3"/>
+<line x1="362" y1="320" x2="2198" y2="320" stroke="#A6B2B9" stroke-width="3"/>
+<line x1="362" y1="320" x2="362" y2="362" stroke="#A6B2B9" stroke-width="3"/>
+<rect x="74" y="362" width="576" height="104" fill="#526677"/>
+<text x="362" y="408.25" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" fill="#FFFFFF">1. Quản lý tài khoản</text>
+<text x="362" y="445.5" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="400" text-anchor="middle" fill="#FFFFFF">CHỨC NĂNG CHUNG</text>
+<line x1="362" y1="466" x2="362" y2="486" stroke="#526677" stroke-width="2"/>
+<line x1="362" y1="486" x2="92" y2="486" stroke="#526677" stroke-width="2"/>
+<line x1="92" y1="486" x2="92" y2="961" stroke="#526677" stroke-width="2"/>
+<line x1="92" y1="568" x2="120" y2="568" stroke="#526677" stroke-width="2"/>
+<rect x="120" y="514" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="120" y="514" width="5" height="108" fill="#526677"/>
+<text x="138" y="556.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#526677">1.1</text>
+<text x="198" y="555.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Đăng ký tài khoản</text>
+<text x="139" y="599.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Dành cho người chơi và chủ sân</text>
+<line x1="92" y1="699" x2="120" y2="699" stroke="#526677" stroke-width="2"/>
+<rect x="120" y="645" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="120" y="645" width="5" height="108" fill="#526677"/>
+<text x="138" y="687.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#526677">1.2</text>
+<text x="198" y="686.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Đăng nhập, đăng xuất</text>
+<text x="139" y="730.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Truy cập theo vai trò tài khoản</text>
+<line x1="92" y1="830" x2="120" y2="830" stroke="#526677" stroke-width="2"/>
+<rect x="120" y="776" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="120" y="776" width="5" height="108" fill="#526677"/>
+<text x="138" y="818.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#526677">1.3</text>
+<text x="198" y="817.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Quản lý hồ sơ cá nhân</text>
+<text x="139" y="861.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Thông tin liên hệ và địa chỉ</text>
+<line x1="92" y1="961" x2="120" y2="961" stroke="#526677" stroke-width="2"/>
+<rect x="120" y="907" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="120" y="907" width="5" height="108" fill="#526677"/>
+<text x="138" y="949.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#526677">1.4</text>
+<text x="198" y="948.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Cập nhật vị trí</text>
+<text x="139" y="992.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Ghim vị trí trên bản đồ</text>
+<line x1="974" y1="320" x2="974" y2="362" stroke="#A6B2B9" stroke-width="3"/>
+<rect x="686" y="362" width="576" height="104" fill="#226851"/>
+<text x="974" y="408.25" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" fill="#FFFFFF">2. Tìm và đặt sân</text>
+<text x="974" y="445.5" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="400" text-anchor="middle" fill="#FFFFFF">NGƯỜI CHƠI</text>
+<line x1="974" y1="466" x2="974" y2="486" stroke="#226851" stroke-width="2"/>
+<line x1="974" y1="486" x2="704" y2="486" stroke="#226851" stroke-width="2"/>
+<line x1="704" y1="486" x2="704" y2="1354" stroke="#226851" stroke-width="2"/>
+<line x1="704" y1="568" x2="732" y2="568" stroke="#226851" stroke-width="2"/>
+<rect x="732" y="514" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="732" y="514" width="5" height="108" fill="#226851"/>
+<text x="750" y="556.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#226851">2.1</text>
+<text x="810" y="555.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Tìm kiếm sân</text>
+<text x="751" y="599.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Theo môn, vị trí và khoảng cách</text>
+<line x1="704" y1="699" x2="732" y2="699" stroke="#226851" stroke-width="2"/>
+<rect x="732" y="645" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="732" y="645" width="5" height="108" fill="#226851"/>
+<text x="750" y="687.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#226851">2.2</text>
+<text x="810" y="686.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Xem thông tin sân</text>
+<text x="751" y="730.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Chi tiết, giá, tiện ích, sân VIP</text>
+<line x1="704" y1="830" x2="732" y2="830" stroke="#226851" stroke-width="2"/>
+<rect x="732" y="776" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="732" y="776" width="5" height="108" fill="#226851"/>
+<text x="750" y="818.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#226851">2.3</text>
+<text x="810" y="817.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Nhận gợi ý sân thông minh</text>
+<text x="751" y="861.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Theo nhu cầu, thời tiết, lịch sử</text>
+<line x1="704" y1="961" x2="732" y2="961" stroke="#226851" stroke-width="2"/>
+<rect x="732" y="907" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="732" y="907" width="5" height="108" fill="#226851"/>
+<text x="750" y="949.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#226851">2.4</text>
+<text x="810" y="948.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Tra cứu và đặt sân</text>
+<text x="751" y="992.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Chọn sân, ngày, giờ trống; giữ chỗ</text>
+<line x1="704" y1="1092" x2="732" y2="1092" stroke="#226851" stroke-width="2"/>
+<rect x="732" y="1038" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="732" y="1038" width="5" height="108" fill="#226851"/>
+<text x="750" y="1080.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#226851">2.5</text>
+<text x="810" y="1079.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Thanh toán đặt sân</text>
+<text x="751" y="1123.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Thanh toán QR giả lập như Cinema</text>
+<line x1="704" y1="1223" x2="732" y2="1223" stroke="#226851" stroke-width="2"/>
+<rect x="732" y="1169" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="732" y="1169" width="5" height="108" fill="#226851"/>
+<text x="750" y="1211.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#226851">2.6</text>
+<text x="810" y="1210.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Quản lý lịch đặt sân</text>
+<text x="751" y="1254.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Xem lịch sử và hủy yêu cầu</text>
+<line x1="704" y1="1354" x2="732" y2="1354" stroke="#226851" stroke-width="2"/>
+<rect x="732" y="1300" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="732" y="1300" width="5" height="108" fill="#226851"/>
+<text x="750" y="1342.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#226851">2.7</text>
+<text x="810" y="1341.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Xem bản đồ, chỉ đường</text>
+<text x="751" y="1385.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Mở chỉ đường bằng Google Maps</text>
+<line x1="1586" y1="320" x2="1586" y2="362" stroke="#A6B2B9" stroke-width="3"/>
+<rect x="1298" y="362" width="576" height="104" fill="#936229"/>
+<text x="1586" y="408.25" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" fill="#FFFFFF">3. Quản lý kinh doanh sân</text>
+<text x="1586" y="445.5" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="400" text-anchor="middle" fill="#FFFFFF">CHỦ SÂN</text>
+<line x1="1586" y1="466" x2="1586" y2="486" stroke="#936229" stroke-width="2"/>
+<line x1="1586" y1="486" x2="1316" y2="486" stroke="#936229" stroke-width="2"/>
+<line x1="1316" y1="486" x2="1316" y2="1223" stroke="#936229" stroke-width="2"/>
+<line x1="1316" y1="568" x2="1344" y2="568" stroke="#936229" stroke-width="2"/>
+<rect x="1344" y="514" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1344" y="514" width="5" height="108" fill="#936229"/>
+<text x="1362" y="556.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#936229">3.1</text>
+<text x="1422" y="555.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Đăng ký, cập nhật cụm sân</text>
+<text x="1363" y="599.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Ảnh, vị trí, tiện ích, giờ mở cửa</text>
+<line x1="1316" y1="699" x2="1344" y2="699" stroke="#936229" stroke-width="2"/>
+<rect x="1344" y="645" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1344" y="645" width="5" height="108" fill="#936229"/>
+<text x="1362" y="687.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#936229">3.2</text>
+<text x="1422" y="686.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Quản lý sân con</text>
+<text x="1363" y="730.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Môn thể thao, mái che, trạng thái</text>
+<line x1="1316" y1="830" x2="1344" y2="830" stroke="#936229" stroke-width="2"/>
+<rect x="1344" y="776" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1344" y="776" width="5" height="108" fill="#936229"/>
+<text x="1362" y="818.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#936229">3.3</text>
+<text x="1422" y="817.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Thiết lập bảng giá</text>
+<text x="1363" y="861.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Theo khung giờ và ngày trong tuần</text>
+<line x1="1316" y1="961" x2="1344" y2="961" stroke="#936229" stroke-width="2"/>
+<rect x="1344" y="907" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1344" y="907" width="5" height="108" fill="#936229"/>
+<text x="1362" y="949.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#936229">3.4</text>
+<text x="1422" y="948.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Quản lý đơn đặt sân</text>
+<text x="1363" y="992.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Xem, xác nhận và hủy đơn</text>
+<line x1="1316" y1="1092" x2="1344" y2="1092" stroke="#936229" stroke-width="2"/>
+<rect x="1344" y="1038" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1344" y="1038" width="5" height="108" fill="#936229"/>
+<text x="1362" y="1080.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#936229">3.5</text>
+<text x="1422" y="1079.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Theo dõi doanh thu</text>
+<text x="1363" y="1123.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Tổng thu, hoa hồng và thực nhận</text>
+<line x1="1316" y1="1223" x2="1344" y2="1223" stroke="#936229" stroke-width="2"/>
+<rect x="1344" y="1169" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1344" y="1169" width="5" height="108" fill="#936229"/>
+<text x="1362" y="1211.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#936229">3.6</text>
+<text x="1422" y="1210.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Mua và quản lý VIP</text>
+<text x="1363" y="1254.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Thanh toán giả lập, thời hạn gói</text>
+<line x1="2198" y1="320" x2="2198" y2="362" stroke="#A6B2B9" stroke-width="3"/>
+<rect x="1910" y="362" width="576" height="104" fill="#5F527F"/>
+<text x="2198" y="408.25" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" fill="#FFFFFF">4. Quản trị hệ thống</text>
+<text x="2198" y="445.5" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="400" text-anchor="middle" fill="#FFFFFF">QUẢN TRỊ VIÊN</text>
+<line x1="2198" y1="466" x2="2198" y2="486" stroke="#5F527F" stroke-width="2"/>
+<line x1="2198" y1="486" x2="1928" y2="486" stroke="#5F527F" stroke-width="2"/>
+<line x1="1928" y1="486" x2="1928" y2="1223" stroke="#5F527F" stroke-width="2"/>
+<line x1="1928" y1="568" x2="1956" y2="568" stroke="#5F527F" stroke-width="2"/>
+<rect x="1956" y="514" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1956" y="514" width="5" height="108" fill="#5F527F"/>
+<text x="1974" y="556.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#5F527F">4.1</text>
+<text x="2034" y="555.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Kiểm duyệt, quản lý sân</text>
+<text x="1975" y="599.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Duyệt, từ chối, chỉnh sửa, ẩn sân</text>
+<line x1="1928" y1="699" x2="1956" y2="699" stroke="#5F527F" stroke-width="2"/>
+<rect x="1956" y="645" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1956" y="645" width="5" height="108" fill="#5F527F"/>
+<text x="1974" y="687.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#5F527F">4.2</text>
+<text x="2034" y="686.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Quản lý người dùng</text>
+<text x="1975" y="730.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Xem và khóa tài khoản</text>
+<line x1="1928" y1="830" x2="1956" y2="830" stroke="#5F527F" stroke-width="2"/>
+<rect x="1956" y="776" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1956" y="776" width="5" height="108" fill="#5F527F"/>
+<text x="1974" y="818.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#5F527F">4.3</text>
+<text x="2034" y="817.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Quản lý gói VIP</text>
+<text x="1975" y="861.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Giá, thời hạn và trạng thái</text>
+<line x1="1928" y1="961" x2="1956" y2="961" stroke="#5F527F" stroke-width="2"/>
+<rect x="1956" y="907" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1956" y="907" width="5" height="108" fill="#5F527F"/>
+<text x="1974" y="949.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#5F527F">4.4</text>
+<text x="2034" y="948.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Thống kê hoạt động</text>
+<text x="1975" y="992.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Lưu lượng theo giờ, ngày và sân</text>
+<line x1="1928" y1="1092" x2="1956" y2="1092" stroke="#5F527F" stroke-width="2"/>
+<rect x="1956" y="1038" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1956" y="1038" width="5" height="108" fill="#5F527F"/>
+<text x="1974" y="1080.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#5F527F">4.5</text>
+<text x="2034" y="1079.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Đối soát và hoàn tiền</text>
+<text x="1975" y="1123.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Trả chủ sân, hoàn tiền giả lập</text>
+<line x1="1928" y1="1223" x2="1956" y2="1223" stroke="#5F527F" stroke-width="2"/>
+<rect x="1956" y="1169" width="530" height="108" fill="#FBFCFC" stroke="#D6DFE1" stroke-width="2"/>
+<rect x="1956" y="1169" width="5" height="108" fill="#5F527F"/>
+<text x="1974" y="1211.95" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" text-anchor="start" fill="#5F527F">4.6</text>
+<text x="2034" y="1210.875" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#213738">Cấu hình hệ thống</text>
+<text x="1975" y="1254.725" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#5D7074">Trọng số AI, thời tiết, hoa hồng</text>
+<line x1="74" y1="1490" x2="2486" y2="1490" stroke="#DCE4E2" stroke-width="2"/>
+<text x="74" y="1533.65" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="start" fill="#516869">PHẠM VI DỰ KIẾN TOÀN DỰ ÁN</text>
+<text x="74" y="1569.65" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="400" text-anchor="start" fill="#64777A">Đường nối thể hiện quan hệ phân rã chức năng; không biểu diễn trình tự xử lý.</text>
+<text x="2050" y="1533.65" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="400" text-anchor="middle" fill="#516869">Thanh toán và hoàn tiền: giả lập theo The Sun Cinema.</text>
+</svg>
