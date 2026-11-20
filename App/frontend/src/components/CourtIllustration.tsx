@@ -4,7 +4,7 @@ import Svg, { Circle, Ellipse, G, Line, Path, Rect } from 'react-native-svg';
 // Decorative vector illustration; does not imply live court availability.
 export default function CourtIllustration() {
   return (
-    <Svg width="100%" height="100%" viewBox="0 0 590 360" accessibilityElementsHidden>
+    <Svg width="100%" height="100%" viewBox="0 0 590 360">
       <Circle cx="480" cy="65" r="45" fill="#F7C84B" />
       <Circle cx="480" cy="65" r="59" fill="none" stroke="#E6E4D6" strokeWidth="1" strokeDasharray="3 7" />
       <Ellipse cx="290" cy="298" rx="244" ry="34" fill="#DDE3D6" />
